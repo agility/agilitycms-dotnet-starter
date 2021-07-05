@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:60400/",
-      "sslPort": 44382
+      "applicationUrl": "http://localhost:59382",
+      "sslPort": 44326
     }
   },
   "profiles": {
@@ -12,16 +12,16 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Live"
       }
     },
-    "Agility.NET5.Starter": {
+    "NET_5._0_Starter": {
       "commandName": "Project",
-      "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Live"
       },
-      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+      "dotnetRunMessages": "true",
+      "applicationUrl": "https://localhost:5003;http://localhost:5004"
     }
   }
 }

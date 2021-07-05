@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <noscript id="render-onload">
+        <link rel="stylesheet" href="~/css/output.css" />
+        <link href="~/css/fontawesome/all.min.css" rel="stylesheet">
+        <link href="~/css/fontawesome/brands.min.css" rel="stylesheet">
+        <link href="~/css/fontawesome/solid.min.css" rel="stylesheet">
+        <link href="~/css/fontawesome/fontawesome.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+    </noscript>
+    <script>
+        var renderOnLoad = function () {
+            var e = document.getElementById('render-onload');
+            var n = document.createElement('div');
+            n.innerHTML = e.textContent;
+            document.body.appendChild(n);
+            e.parentElement.removeChild(e);
+        };
+        if (window.requestAnimationFrame) {
+            window.requestAnimationFrame(function() { window.setTimeout(renderOnLoad, 0) });
+        } else {
+            window.addEventListener('load', renderOnLoad);
+        }
+    </script>
+    @await RenderSectionAsync("SEO")
+</head>
+
+<body>
+    <div id="site-wrapper">
+        <div id="site">
+            @await Component.InvokeAsync("PreviewBar")
+            <div class="flex flex-col min-h-screen">
+                @await RenderSectionAsync("TopZone")
+                <main class="flex-grow">
+                    @await RenderSectionAsync("MainContentZone")
+                </main>
+                @await Component.InvokeAsync("SiteFooter")
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

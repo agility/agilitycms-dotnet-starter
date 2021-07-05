@@ -1,3 +1,4 @@
+E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\bin\Debug\net5.0\appsettings.json
 E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\bin\Debug\net5.0\package-lock.json
 E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\bin\Debug\net5.0\package.json
 E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\bin\Debug\net5.0\Agility.NET5.Starter.exe
@@ -30,6 +31,17 @@ E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Agili
 E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Razor\Pages\AgilityPage.cshtml.g.cs
 E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Razor\Pages\Error.cshtml.g.cs
 E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Razor\Pages\_ViewImports.cshtml.g.cs
+E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Razor\Views\PageModules\FeaturedPost.cshtml.g.cs
+E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Razor\Views\PageModules\Heading.cshtml.g.cs
+E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Razor\Views\PageModules\PostDetails.cshtml.g.cs
+E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Razor\Views\PageModules\PostsListing.cshtml.g.cs
+E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Razor\Views\PageModules\RichTextArea.cshtml.g.cs
+E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Razor\Views\PageModules\TextBlockWithImage.cshtml.g.cs
+E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Razor\Views\PageTemplates\MainTemplate.cshtml.g.cs
+E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Razor\Views\Shared\PreviewBar.cshtml.g.cs
+E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Razor\Views\Shared\SEO.cshtml.g.cs
+E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Razor\Views\Shared\SiteFooter.cshtml.g.cs
+E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Razor\Views\Shared\SiteHeader.cshtml.g.cs
 E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Agility.NET5.Starter.RazorTargetAssemblyInfo.cache
 E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Agility.NET5.Starter.RazorTargetAssemblyInfo.cs
 E:\Source\agilitycms-dotnet5-starter\Agility.NET5.Starter\obj\Debug\net5.0\Agility.NET5.Starter.Views.pdb
