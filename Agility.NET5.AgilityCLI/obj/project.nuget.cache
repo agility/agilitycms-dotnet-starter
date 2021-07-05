@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "dgSpecHash": "W0eX6FCvRNvjHzmy7xsrhMsyyH8wqIHnf4KHznxEZ3SsIgOLGnE0J7XuEutJmudojNTTUZnqkAwLOqxL5vjwqg==",
+  "success": true,
+  "projectFilePath": "E:\\Source\\Agility.NET5.Starter\\Agility.NET5.AgilityCLI\\Agility.NET5.AgilityCLI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dkarpienia\\.nuget\\packages\\agility.net5.shared\\1.0.0\\agility.net5.shared.1.0.0.nupkg.sha512",
+    "C:\\Users\\dkarpienia\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\dkarpienia\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\dkarpienia\\.nuget\\packages\\restsharp\\106.11.7\\restsharp.106.11.7.nupkg.sha512",
+    "C:\\Users\\dkarpienia\\.nuget\\packages\\system.configuration.configurationmanager\\5.0.0\\system.configuration.configurationmanager.5.0.0.nupkg.sha512",
+    "C:\\Users\\dkarpienia\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512",
+    "C:\\Users\\dkarpienia\\.nuget\\packages\\system.security.accesscontrol\\5.0.0\\system.security.accesscontrol.5.0.0.nupkg.sha512",
+    "C:\\Users\\dkarpienia\\.nuget\\packages\\system.security.cryptography.protecteddata\\5.0.0\\system.security.cryptography.protecteddata.5.0.0.nupkg.sha512",
+    "C:\\Users\\dkarpienia\\.nuget\\packages\\system.security.permissions\\5.0.0\\system.security.permissions.5.0.0.nupkg.sha512",
+    "C:\\Users\\dkarpienia\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
+    "C:\\Users\\dkarpienia\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
