@@ -13,8 +13,8 @@
     "WebsiteName": "",
     "FetchAPIKey": "",
     "PreviewAPIKey": "",
-    "Locales": "",
-    "ChannelName": "",
+    "Locales": "en-us",
+    "ChannelName": "website",
     "CacheInMinutes": 0
   }
 }
