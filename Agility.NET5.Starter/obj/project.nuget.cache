@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xS5TClzICSRmvMAML5RTX+UrK/sumhrHbZbpEmNvZOH3Jbo5xeunbA0CkKtyTeJH3M9/w4hP3ms8b+AfXjo8Vg==",
+  "dgSpecHash": "RpWH+nRvGTxPwkK3TYTDlRdCnaUNo3gvmwl3bZogWatS9L92ijQklK043KwqIDc61F0jK5l4WSbYxuAu9Aq0UA==",
   "success": true,
-  "projectFilePath": "E:\\Source\\Agility.NET5.Starter\\Agility.NET5.Starter\\Agility.NET5.Starter.csproj",
+  "projectFilePath": "E:\\Source\\agilitycms-dotnet5-starter\\Agility.NET5.Starter\\Agility.NET5.Starter.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dkarpienia\\.nuget\\packages\\agility.net5.core\\1.0.1\\agility.net5.core.1.0.1.nupkg.sha512",
     "C:\\Users\\dkarpienia\\.nuget\\packages\\agility.net5.fetchapi\\1.0.1\\agility.net5.fetchapi.1.0.1.nupkg.sha512",

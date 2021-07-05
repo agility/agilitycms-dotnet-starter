@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Source\\Agility.NET5.Starter\\Agility.NET5.AgilityCLI\\Agility.NET5.AgilityCLI.csproj": {}
+    "E:\\Source\\agilitycms-dotnet5-starter\\Agility.NET5.AgilityCLI\\Agility.NET5.AgilityCLI.csproj": {}
   },
   "projects": {
-    "E:\\Source\\Agility.NET5.Starter\\Agility.NET5.AgilityCLI\\Agility.NET5.AgilityCLI.csproj": {
+    "E:\\Source\\agilitycms-dotnet5-starter\\Agility.NET5.AgilityCLI\\Agility.NET5.AgilityCLI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Source\\Agility.NET5.Starter\\Agility.NET5.AgilityCLI\\Agility.NET5.AgilityCLI.csproj",
+        "projectUniqueName": "E:\\Source\\agilitycms-dotnet5-starter\\Agility.NET5.AgilityCLI\\Agility.NET5.AgilityCLI.csproj",
         "projectName": "Agility.NET5.AgilityCLI",
-        "projectPath": "E:\\Source\\Agility.NET5.Starter\\Agility.NET5.AgilityCLI\\Agility.NET5.AgilityCLI.csproj",
+        "projectPath": "E:\\Source\\agilitycms-dotnet5-starter\\Agility.NET5.AgilityCLI\\Agility.NET5.AgilityCLI.csproj",
         "packagesPath": "C:\\Users\\dkarpienia\\.nuget\\packages\\",
-        "outputPath": "E:\\Source\\Agility.NET5.Starter\\Agility.NET5.AgilityCLI\\obj\\",
+        "outputPath": "E:\\Source\\agilitycms-dotnet5-starter\\Agility.NET5.AgilityCLI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

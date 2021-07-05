@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "W0eX6FCvRNvjHzmy7xsrhMsyyH8wqIHnf4KHznxEZ3SsIgOLGnE0J7XuEutJmudojNTTUZnqkAwLOqxL5vjwqg==",
+  "dgSpecHash": "dHSfHes5+R6SEyZ3wBuWHToq/5dlYG+ihwCWr02n3jnerQG5kjJeM+hOIkPMif0jBw1OatYQ7l3jqXG/0mYq9Q==",
   "success": true,
-  "projectFilePath": "E:\\Source\\Agility.NET5.Starter\\Agility.NET5.AgilityCLI\\Agility.NET5.AgilityCLI.csproj",
+  "projectFilePath": "E:\\Source\\agilitycms-dotnet5-starter\\Agility.NET5.AgilityCLI\\Agility.NET5.AgilityCLI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dkarpienia\\.nuget\\packages\\agility.net5.shared\\1.0.0\\agility.net5.shared.1.0.0.nupkg.sha512",
     "C:\\Users\\dkarpienia\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
