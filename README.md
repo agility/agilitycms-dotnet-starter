@@ -1,6 +1,8 @@
 # Agility CMS & .NET 5 Starter
 
-[New to Agility CMS? Sign up for a FREE account](https://agilitycms.com/free)
+New to Agility CMS? [Sign up for a FREE account](https://agilitycms.com/free)
+
+[Introduction to .NET5 and Agility CMS](https://help.agilitycms.com/hc/en-us/articles/4404089239693)
 
 ## About This Starter
 - Uses the latest version of .NET, with greatly improved performance across many components, Language improvements to C# and F#, and much more.
