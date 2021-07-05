@@ -1,0 +1,12 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# builds
+Agility.NET5.Starter/bin
+Agility.NET5.Starter/obj
+Agility.NET5.Starter/node_modules
+Agility.NET5.AgilityCLI/bin
+Agility.NET5.AgilityCLI/obj
+
+Agility.NET5.Starter/appsettings.json
+Agility.NET5.AgilityCLI/App.config
+Agility.NET5.Starter/wwwroot/css/output.css
