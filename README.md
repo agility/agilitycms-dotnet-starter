@@ -1,6 +1,6 @@
 # Agility CMS & .NET 5 Starter
 
-New to Agility CMS? [Sign up for a FREE account](https://agilitycms.com/free)
+To start using the Agility CMS & .NET 5 Starter, [sign up](https://agilitycms.com/free) for a FREE account and create a new Instance using the Blog Template.
 
 [Introduction to .NET5 and Agility CMS](https://help.agilitycms.com/hc/en-us/articles/4404089239693)
 
@@ -17,8 +17,6 @@ This starter uses [Tailwind CSS](https://tailwindcss.com/), a simple and lightwe
 It also comes equipped with [Autoprefixer](https://www.npmjs.com/package/autoprefixer), a plugin which use the data based on current browser popularity and property support to apply CSS prefixes for you.
 
 ## Getting Started
-
-To start using the Agility CMS & .NET 5 Starter, [sign up](https://agilitycms.com/free) for a FREE account and create a new Instance using the Blog Template.
 
 🚨  Before you dive into the code, it's important that you have the latest version of the [.NET SDK](https://dotnet.microsoft.com/download) installed on your machine (>=v5.0), as the project will *not* run without this.
 
