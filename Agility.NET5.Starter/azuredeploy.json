@@ -103,7 +103,7 @@
   "resources": [
     {
       "type": "Microsoft.Web/serverfarms",
-      "apiVersion": "2021-05-01",
+      "apiVersion": "2021-01-15",
       "name": "[variables('appServicePlanPortalName')]",
       "location": "[resourceGroup().location]",
       "sku": {
