@@ -155,7 +155,8 @@
             }
           ]
         },
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]"
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]",
+        "netFrameworkVersion": "net5.0"       
       },
       "resources": [
         {
