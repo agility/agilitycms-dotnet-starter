@@ -48,7 +48,7 @@ It also comes equipped with [Autoprefixer](https://www.npmjs.com/package/autopre
 
 ## Deploy to Azure Web App
 
-1. Create an Web App (server) to host your application by clicking `Azure Deploy` button below:
+1. Create an Web App (server) to host your application by clicking `Azure Deploy` button below: <br/>
    [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fagility%2Fagilitycms-dotnet5-starter%2Fdev%2Fazure-deploy%2FAgility.NET5.Starter%2Fazuredeploy.json)
 
 2. Deploy your source to Web App by following the steps here [How to Deploy .NET 5.0 Starter to Azure](https://help.agilitycms.com/hc/en-us/articles/4404691689229)
