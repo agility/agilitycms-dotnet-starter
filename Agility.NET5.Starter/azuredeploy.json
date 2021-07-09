@@ -120,6 +120,7 @@
       ],
       "properties": {
         "siteConfig": {
+          "netFrameworkVersion": "net5.0",  
           "appSettings": [
             {
               "name": "InstanceGUID",
@@ -156,7 +157,6 @@
           ]
         },
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]",
-        "netFrameworkVersion": "net5.0"       
       },
       "resources": [
         {
