@@ -162,10 +162,14 @@
           "type": "sourcecontrols",
           "apiVersion": "2021-01-15",
           "name": "web",
+          "location": "[resourceGroup().location]",
           "dependsOn": [
             "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
           ],
           "properties": {
+            "repoUrl": "https://github.com/Azure-Samples/app-service-web-dotnet-get-started",
+            "branch": "master",
+            "isManualIntegration": true
           }
         }
       ]
