@@ -1,0 +1,174 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "webAppName": {
+      "type": "string",
+      "defaultValue": "agilitycms-dotnet5",
+      "minLength": 2,
+      "metadata": {
+        "description": "Web app name."
+      }
+    },
+    "sku": {
+      "type": "string",
+      "defaultValue": "F1",
+      "allowedValues": [
+        "D1",
+        "F1",
+        "B1",
+        "B2",
+        "B3",
+        "S1",
+        "S2",
+        "S3",
+        "P1",
+        "P2",
+        "P3",
+        "P1V2",
+        "P2V2",
+        "P3V2",
+        "I1",
+        "I2",
+        "I3",
+        "Y1",
+        "EP1",
+        "EP2",
+        "EP3"
+      ],
+      "metadata": {
+        "description": "The SKU of App Service Plan."
+      }
+    },
+    "instanceGuid": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Agility Instance GUID"
+      }
+    },
+    "securityKey": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Agility Instance Security Key"
+      }
+    },
+    "websiteName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Agility Instance Website Name"
+      }
+    },
+    "fetchAPIKey": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Agility Instance Fetch API Key"
+      }
+    },
+    "previewAPIKey": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Agility Instance Preview API Key"
+      }
+    },
+    "locales": {
+      "type": "string",
+      "defaultValue": "en-us",
+      "metadata": {
+        "description": "Agility Instance Locale"
+      }
+    },
+    "channelName": {
+      "type": "string",
+      "defaultValue": "website",
+      "metadata": {
+        "description": "Agility Instance Channel Name"
+      }
+    },
+    "cacheInMinutes": {
+      "type": "int",
+      "defaultValue": 0,
+      "metadata": {
+        "description": "Agility Instance Sitemap/URL Redirects Cache Time"
+      }
+    }
+  },
+  "variables": {
+    "appServicePlanPortalName": "[concat('AppServicePlan-', parameters('webAppName'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2021-05-01",
+      "name": "[variables('appServicePlanPortalName')]",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "[parameters('sku')]"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2021-01-15",
+      "name": "[parameters('webAppName')]",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]"
+      ],
+      "properties": {
+        "siteConfig": {
+          "appSettings": [
+            {
+              "name": "InstanceGUID",
+              "value": "[parameters('instanceGuid')]"
+            },
+            {
+              "name": "SecurityKey",
+              "value": "[parameters('securityKey')]"
+            },
+            {
+              "name": "WebsiteName",
+              "value": "[parameters('websiteName')]"
+            },
+            {
+              "name": "FetchAPIKey",
+              "value": "[parameters('fetchAPIKey')]"
+            },
+            {
+              "name": "PreviewAPIKey",
+              "value": "[parameters('previewAPIKey')]"
+            },
+            {
+              "name": "Locales",
+              "value": "[parameters('locales')]"
+            },
+            {
+              "name": "ChannelName",
+              "value": "[parameters('channelName')]"
+            },
+            {
+              "name": "CacheInMinutes",
+              "value": "[parameters('cacheInMinutes')]"
+            }
+          ]
+        },
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]"
+      },
+      "resources": [
+        {
+          "type": "sourcecontrols",
+          "apiVersion": "2021-01-15",
+          "name": "web",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
+          ],
+          "properties": {
+          }
+        }
+      ]
+    }
+  ]
+}
