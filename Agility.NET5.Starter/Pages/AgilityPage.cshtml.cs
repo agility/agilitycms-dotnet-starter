@@ -39,17 +39,16 @@ namespace Agility.NET5.Starter.Pages
                 ContentLinkDepth = 2
             };
 
-            var content = await _fetchApiService.GetPage(getPageExpandedParameters);
-            var deserializedContent = DynamicHelpers.DeserializeTo<PageResponse>(content);
+            var page = await _fetchApiService.GetTypedPage(getPageExpandedParameters);
 
-            if (deserializedContent == null) return Page();
-            
-            deserializedContent.IsDynamicPage = (deserializedContent.Dynamic != null);
+            if (page == null) return Page();
 
-            if (deserializedContent.IsDynamicPage)
+            page.IsDynamicPage = (page.Dynamic != null);
+
+            if (page.IsDynamicPage)
             {
-                deserializedContent.Name = deserializedContent.IsDynamicPage ? sitemapPage.Name : deserializedContent.Name;
-                RouteData.Values["dynamicFields"] = deserializedContent.Dynamic;
+                page.Name = page.IsDynamicPage ? sitemapPage.Name : page.Name;
+                RouteData.Values["dynamicFields"] = page.Dynamic;
 
                 var getItemParameters = new GetItemParameters()
                 {
@@ -63,11 +62,10 @@ namespace Agility.NET5.Starter.Pages
                 RouteData.Values["contentItem"] = contentItem;
             }
 
-            List<ContentZone> contentZonesExpanded = DynamicHelpers.DeserializeContentZones(deserializedContent.Zones.ToString());
 
-            PageResponse = deserializedContent;
+            PageResponse = page;
             Locale = sitemapPage.Locale;
-            ContentZones = contentZonesExpanded;
+            ContentZones = page.Zones;
             SitemapPage = sitemapPage;
 
             return Page();

@@ -1,16 +1,30 @@
 ﻿using System.Threading.Tasks;
 using Agility.NET5.FetchAPI.Helpers;
 using Agility.NET5.FetchAPI.Models;
+using Agility.NET5.FetchAPI.Models.Data;
+using Agility.NET5.FetchAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Agility.NET5.Starter.ViewComponents.PageModules
 {
+
     public class Heading: ViewComponent
     {
-        public Task<IViewComponentResult> InvokeAsync(ModuleModel moduleModel)
+        private readonly FetchApiService _fetchApiService;
+
+        public Heading(FetchApiService fetchApiService)
         {
-            var model = DynamicHelpers.DeserializeTo<Agility.Models.Heading>(moduleModel.Module);
-            return Task.Run<IViewComponentResult>(() => View("/Views/PageModules/Heading.cshtml", model));
+            _fetchApiService = fetchApiService;
+        }
+        public async Task<IViewComponentResult> InvokeAsync(ModuleModel moduleModel)
+        {
+            var getParams = new GetItemParameters
+            {
+                ContentId = moduleModel.Model.Item.ContentID,
+                Locale = moduleModel.Locale
+            };
+            var heading = await _fetchApiService.GetTypedContentItem<Agility.Models.Heading>(getParams);
+            return View("/Views/PageModules/Heading.cshtml", heading);
         }
     }
 }

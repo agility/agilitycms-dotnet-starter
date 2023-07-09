@@ -31,8 +31,7 @@ namespace Agility.NET5.Starter.ViewComponents.Shared
                 Locale = locale
             };
 
-            var content = await _fetchApiService.GetContentItem(getItemParameters);
-            var siteHeader = DynamicHelpers.DeserializeTo<ContentItemResponse<Agility.Models.SiteHeader>>(content);
+            var siteHeader = await _fetchApiService.GetTypedContentItem<Agility.Models.SiteHeader>(getItemParameters);
 
             var getSitemapParameters = new GetSitemapParameters()
             {
@@ -40,14 +39,13 @@ namespace Agility.NET5.Starter.ViewComponents.Shared
                 Locale = locale
             };
 
-            var sitemap = await _fetchApiService.GetSitemapFlat(getSitemapParameters);
-            var deserializedSitemap = DynamicHelpers.DeserializeSitemapFlat(sitemap);
-            deserializedSitemap = deserializedSitemap.Where(s => !string.IsNullOrEmpty(s.Name) && s.Visible.Menu).ToList();
+            var sitemap = await _fetchApiService.GetTypedSitemapFlat(getSitemapParameters);
+            sitemap = sitemap.Where(s => !string.IsNullOrEmpty(s.Name) && s.Visible.Menu).ToList();
 
             var siteHeaderModel = new SiteHeaderModel()
             {
                 SiteHeader = siteHeader.Fields,
-                SitemapPages = deserializedSitemap
+                SitemapPages = sitemap
             };
 
             return await Task.Run<IViewComponentResult>(() => View("/Views/Shared/SiteHeader.cshtml", siteHeaderModel));

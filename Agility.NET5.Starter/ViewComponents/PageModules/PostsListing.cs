@@ -2,16 +2,29 @@
 using Agility.Models;
 using Agility.NET5.FetchAPI.Helpers;
 using Agility.NET5.FetchAPI.Models;
+using Agility.NET5.FetchAPI.Models.Data;
+using Agility.NET5.FetchAPI.Services;
+using Agility.NET5.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Agility.NET5.Starter.ViewComponents.PageModules
 {
     public class PostsListing: ViewComponent
     {
-        public Task<IViewComponentResult> InvokeAsync(ModuleModel moduleModel)
+        private readonly FetchApiService _fetchApiService;
+        public PostsListing(FetchApiService fetchApiService) { 
+            _fetchApiService = fetchApiService;
+        }
+
+        public async Task<IViewComponentResult> InvokeAsync(ModuleModel moduleModel)
         {
-            var postsListing = DynamicHelpers.DeserializeTo<ModelExtensions.PostsListingExpanded>(moduleModel.Module);
-            return Task.Run<IViewComponentResult>(() => View("/Views/PageModules/PostsListing.cshtml", postsListing));
+            var getParams = new GetListParameters
+            {
+                ReferenceName = "posts",
+                Locale = moduleModel.Locale
+            };
+            var posts = await _fetchApiService.GetTypedContentList<Post>(getParams);
+            return View("/Views/PageModules/PostsListing.cshtml", posts);
         }
     }
 }
