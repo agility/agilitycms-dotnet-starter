@@ -1,0 +1,24 @@
+﻿@using System.Globalization
+@using Agility.Models
+@using Agility.NET.FetchAPI.Helpers
+@model Agility.NET.FetchAPI.Models.API.PageResponse
+
+@{
+    var ti = CultureInfo.CurrentCulture.TextInfo;
+}
+
+@if (Model.IsDynamicPage)
+{
+    var post = DynamicHelpers.DeserializeContentItemTo<Post>(ViewContext.RouteData.Values["contentItem"]?.ToString());
+    <title>@Model.Title | My Travel Blog</title>
+}
+else
+{
+    <title>@ti.ToTitleCase(Model.Title) | My Travel Blog</title>
+}
+<meta name="generator" content="Agility CMS" />
+<meta name="agility_timestamp" content=@DateTime.Now />
+<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+<meta name="description" content=@Model.SEO.MetaDescription>
+<meta name="keywords" content=@Model.SEO.MetaKeywords />
+@Html.Raw(Model.SEO.MetaHTML)

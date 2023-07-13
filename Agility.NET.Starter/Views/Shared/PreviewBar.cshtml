@@ -1,0 +1,137 @@
+﻿@using Agility.NET.FetchAPI.Util
+
+@functions {
+    private string IsPreview()
+    {
+        var isPreview = Context.Request.Cookies["isPreview"] ?? "false";
+        
+        Context.Response.Headers.TryGetValue("Set-Cookie", out var cookie);
+        if (!cookie.ToString().Contains("isPreview=true;")) return isPreview;
+
+        isPreview = "true";
+        Context.Response.Redirect(Context.Request.Path);
+        return isPreview;
+    }
+}
+
+@{
+    var isPreview = IsPreview();
+
+    var modes = new List<SelectListItem>()
+    {
+        new SelectListItem(Constants.Preview.ToUpper(), Constants.Preview, isPreview == "true"),
+        new SelectListItem(Constants.Live.ToUpper(), Constants.Live, isPreview == "false")
+    };
+    
+
+    <div class="bg-agility relative px-8 text-gray-200">
+        <div class="flex justify-between items-center max-w-screen-xl mx-auto">
+            <div class="flex items-center">
+                <span class="p-2 rounded-lg mr-4">
+                    <a href="https://www.agilitycms.com" target="_blank" title="Agility CMS">
+                        <img src="~/assets/agility-preview-logo.svg" alt="Agility CMS" height="20" width="80" class="h-5 w-20 hidden md:block" />
+                    </a>
+                </span>
+                <div class="mr-4">
+                    <a href="https://help.agilitycms.com/hc/en-us" target="_blank" title="Help Center">
+                        <div class="flex items-center">
+                            <i class="fas fa-info-circle text-2xl mr-2" aria-hidden="true"></i>
+                            <p class="hidden md:block text-sm">Help Center</p>
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://github.com/agility/agilitycms-dotnet-starter" target="_blank" title="View on GitHub"
+                       class="text-2xl">
+                        <div class="flex items-center">
+                            <i class="fab fa-github mr-2" aria-hidden="true"></i>
+                            <p class="hidden md:block text-sm">View on GitHub</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="relative flex items-center py-4 bg-agility">
+                @if (isPreview == "false")
+                {
+                    <p class="hidden md:block text-sm px-2 text-gray-200">
+                        Viewing <span class="font-bold">Published</span> Content
+                    </p>
+                }
+                else
+                {
+                    <p class="hidden md:block text-sm px-2 text-gray-200">
+                        Previewing <span class="font-bold">Latest</span> Changes
+                    </p>
+                }
+
+            <div id="menuButton"
+                 class="p-2 text-gray-200 rounded-lg cursor-pointer z-20 cursor-pointer"
+                 onclick="showMenu()">
+                <i id="up" class="fa fa-chevron-up" style="display: none;"></i>
+                <i id="down" class="fa fa-chevron-down"></i>
+
+            </div>
+            <div 
+                id="menu"
+                style="display: none;"
+                class="absolute bg-white text-white text-sm py-4 px-6 w-20.1 -right-0 -bottom-28 md:-bottom-16 z-10 rounded-b-lg shadow-xl md:max-w-full"
+            >
+    
+                @if (isPreview == "true")
+                {
+                    <p class="mb-4 text-center text-agility z-20">
+                        Previewing <span class="font-bold">Latest</span> Changes
+                    </p>
+                }
+                else
+                {
+                    <p class="mb-4 text-center text-agility z-20">
+                        Viewing <span class="font-bold">Published</span> Content
+                    </p>
+                }
+                <button
+                    class="text-gray-200 bg-agility p-2 w-full rounded-md text-sm"
+                    onclick="togglePreview('@isPreview')"
+                >
+                    @(isPreview == "true" ? "View Live Mode" : "View Preview Mode")
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+    
+}
+
+<script>
+    function togglePreview(value) {
+
+        var cookieString;
+        if (value === "true") {
+            cookieString = "isPreview=false;path=/";
+        } else {
+            cookieString = "isPreview=true;path=/";
+        }
+
+        document.cookie = cookieString;
+        location.reload();
+    }
+    function showMenu() {
+
+        var menu = document.getElementById("menu");
+        var menuButton = document.getElementById("menuButton");
+        var upArrow = document.getElementById("up");
+        var downArrow = document.getElementById("down");
+
+        if (menu.style.display === "none") {
+            menu.style.display = "block";
+            menuButton.style.color = "black";
+            upArrow.style.display = "block";
+            downArrow.style.display = "none";
+        } else {
+            menu.style.display = "none";
+            menuButton.style.color = "white";
+            upArrow.style.display = "none";
+            downArrow.style.display = "block";
+        }
+    }
+</script>

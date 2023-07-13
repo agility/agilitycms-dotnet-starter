@@ -1,14 +1,14 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # builds
-Agility.NET5.Starter/bin
-Agility.NET5.Starter/obj
-Agility.NET5.Starter/node_modules
-Agility.NET5.AgilityCLI/bin
-Agility.NET5.AgilityCLI/obj
-Agility.NET5.Starter/.vs
+Agility.NET.Starter/bin
+Agility.NET.Starter/obj
+Agility.NET.Starter/node_modules
+Agility.NET.AgilityCLI/bin
+Agility.NET.AgilityCLI/obj
+Agility.NET.Starter/.vs
 
-Agility.NET5.Starter/appsettings.json
-Agility.NET5.AgilityCLI/App.config
-Agility.NET5.Starter/wwwroot/css/output.css
+Agility.NET.Starter/appsettings.json
+Agility.NET.AgilityCLI/App.config
+Agility.NET.Starter/wwwroot/css/output.css
 

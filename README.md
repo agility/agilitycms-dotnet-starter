@@ -2,7 +2,7 @@
 
 To start using the Agility CMS & .NET 5 Starter, [sign up](https://agilitycms.com/free) for a FREE account and create a new Instance using the Blog Template.
 
-[Introduction to .NET5 and Agility CMS](https://help.agilitycms.com/hc/en-us/articles/4404089239693)
+[Introduction to .NET and Agility CMS](https://help.agilitycms.com/hc/en-us/articles/4404089239693)
 
 ## About This Starter
 
@@ -23,14 +23,14 @@ It also comes equipped with [Autoprefixer](https://www.npmjs.com/package/autopre
 
 ### Generating/Syncing Content Models from your Agility Instance
 
-1. cd into the `Agility.NET5.AgilityCLI` directory.
+1. cd into the `Agility.NET.AgilityCLI` directory.
 2. Rename the `App.config.example` file to `App.config`.
 3. Overwrite the values in the `App.config` file with the values from the API Keys page in [Agility Settings](https://manager.agilitycms.com/settings/apikeys).
 4. Run `dotnet run update preview` to download the Content Models from your Agility CMS instance, and generate the classes of the Content Models for you.
 
 ### Setting up the Starter
 
-1. cd into the `Agility.NET5.Starter` directory.
+1. cd into the `Agility.NET.Starter` directory.
 2. Rename the `appsetting.json.example` file to `appsettings.json`.
 3. Overwrite the values in the `appsettings.json` file with the credentials from the API Keys page in [Agility Settings](https://manager.agilitycms.com/settings/apikeys).
 
@@ -49,7 +49,7 @@ It also comes equipped with [Autoprefixer](https://www.npmjs.com/package/autopre
 ## Deploy to Azure Web App
 
 1. Create an Web App (server) to host your application by clicking `Azure Deploy` button below: <br/>
-   [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fagility%2Fagilitycms-dotnet5-starter%2Fmain%2FAgility.NET5.Starter%2Fazuredeploy.json)
+   [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fagility%2Fagilitycms-dotnet-starter%2Fmain%2FAgility.NET.Starter%2Fazuredeploy.json)
 
 2. Deploy your source to Web App by following the steps here [How to Deploy .NET 5.0 Starter to Azure](https://help.agilitycms.com/hc/en-us/articles/4404691689229)
 
@@ -81,4 +81,4 @@ It also comes equipped with [Autoprefixer](https://www.npmjs.com/package/autopre
 
 ## Feedback and Questions
 
-If you have feedback or questions about this starter, please use the [Github Issues](https://github.com/agility/agilitycms-dotnet5-starter/issues) on this repo, join our [Community Slack Channel](https://join.slack.com/t/agilitycommunity/shared_invite/enQtNzI2NDc3MzU4Njc2LWI2OTNjZTI3ZGY1NWRiNTYzNmEyNmI0MGZlZTRkYzI3NmRjNzkxYmI5YTZjNTg2ZTk4NGUzNjg5NzY3OWViZGI) or create a post on the [Agility Developer Community](https://help.agilitycms.com/hc/en-us/community/topics).
+If you have feedback or questions about this starter, please use the [Github Issues](https://github.com/agility/agilitycms-dotnet-starter/issues) on this repo, join our [Community Slack Channel](https://join.slack.com/t/agilitycommunity/shared_invite/enQtNzI2NDc3MzU4Njc2LWI2OTNjZTI3ZGY1NWRiNTYzNmEyNmI0MGZlZTRkYzI3NmRjNzkxYmI5YTZjNTg2ZTk4NGUzNjg5NzY3OWViZGI) or create a post on the [Agility Developer Community](https://help.agilitycms.com/hc/en-us/community/topics).
