@@ -94,6 +94,8 @@ public partial class TextBlockWithImage
 
    public string Content { get; set; }
 
+   public string HighPriority { get; set; }
+
 }
 public partial class FeaturedPost_Model
 {

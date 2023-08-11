@@ -36,7 +36,7 @@ namespace Agility.NET.Starter.Pages
                 PageId = sitemapPage.PageID,
                 Locale = sitemapPage.Locale,
                 ExpandAllContentLinks = true,
-                ContentLinkDepth = 2
+                ContentLinkDepth = 0
             };
 
             var page = await _fetchApiService.GetTypedPage(getPageExpandedParameters);
