@@ -1,6 +1,6 @@
-# Agility CMS & .NET 5 Starter
+# Agility CMS & .NET Starter
 
-To start using the Agility CMS & .NET 5 Starter, [sign up](https://agilitycms.com/free) for a FREE account and create a new Instance using the Blog Template.
+To start using the Agility CMS & .NET Starter, [sign up](https://agilitycms.com/free) for a FREE account and create a new Instance using the Blog Template.
 
 [Introduction to .NET and Agility CMS](https://help.agilitycms.com/hc/en-us/articles/4404089239693)
 
@@ -19,7 +19,7 @@ It also comes equipped with [Autoprefixer](https://www.npmjs.com/package/autopre
 
 ## Getting Started
 
-🚨 Before you dive into the code, it's important that you have the latest version of the [.NET SDK](https://dotnet.microsoft.com/download) installed on your machine (>=v5.0), as the project will _not_ run without this.
+🚨 Before you dive into the code, it's important that you have the latest version of the [.NET SDK](https://dotnet.microsoft.com/download) installed on your machine (>=v7.0), as the project will _not_ run without this.
 
 ### Generating/Syncing Content Models from your Agility Instance
 
