@@ -39,12 +39,12 @@
             var moduleModel = new ModuleModel()
             {
                 Locale = Model.Locale,
-                Module = model.Item.Fields.ToString(),
+                Module = model?.Item?.Fields?.ToString() ?? "",
                 Model = model,
                 SitemapPage = Model.SitemapPage
             };
 
-            Write(await Component.InvokeAsync(model.Item.Properties.DefinitionName, moduleModel));
+            Write(await Component.InvokeAsync(model.Module, moduleModel));
         }
     });
 }
