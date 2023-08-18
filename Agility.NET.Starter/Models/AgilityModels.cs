@@ -1,3 +1,4 @@
+using Agility.NET.FetchAPI.Models.API;
 using System;
 using System.Collections.Generic;
 
@@ -67,8 +68,30 @@ public partial class Post
 
    public string CategoryID { get; set; }
 
-}
-public partial class SiteHeader
+    }
+
+    public partial class PostGQL
+    {
+        public string Title { get; set; }
+
+        public string Slug { get; set; }
+
+        public DateTime Date { get; set; }
+
+        public ContentItemResponse<Category> Category { get; set; }
+
+        public ImageAttachment Image { get; set; }
+
+        public string Content { get; set; }
+
+        public int? AuthorID { get; set; }
+
+        public string CategoryID { get; set; }
+    }
+
+
+
+    public partial class SiteHeader
 {
    public ImageAttachment Logo { get; set; }
 
