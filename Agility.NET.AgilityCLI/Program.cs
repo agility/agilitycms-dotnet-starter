@@ -40,8 +40,8 @@ namespace Agility.NET.AgilityCLI
                 Console.WriteLine($@"Downloading content definitions from Agility website: {websiteName} GUID: {instanceGUID}...");
                 Console.ForegroundColor = ConsoleColor.Blue;
 
-                var request = new RestRequest("/contentmodels", Method.GET);
-                var contentDefinitions = client.Execute<Dictionary<string,ContentDefinition>>(request).Data;
+                var request = new RestRequest("/contentmodels", Method.Get);
+                var contentDefinitions = client.Execute<Dictionary<string, ContentDefinition>>(request).Data;
 
                 var builder = GenerateClasses(contentDefinitions, out var errors);
 
