@@ -25,13 +25,21 @@ namespace Agility.NET.Starter.ViewComponents.Shared
 
         public async Task<IViewComponentResult> InvokeAsync(string locale)
         {
-            var getItemParameters = new GetItemParameters()
-            {
-                ContentId = Constants.SiteHeaderContentId,
-                Locale = locale
-            };
 
-            var siteHeader = await _fetchApiService.GetTypedContentItem<Agility.Models.SiteHeader>(getItemParameters);
+
+            var siteHeaderResponse = await _fetchApiService.GetTypedContentList<Agility.Models.SiteHeader>(new GetListParameters()
+            {
+                ReferenceName = Constants.SiteHeaderReferenceName,
+                Locale = locale,
+                Take = 1,
+                ContentLinkDepth = 0
+            });
+
+            var siteHeader = siteHeaderResponse.Items.FirstOrDefault();
+            if (siteHeader == null)
+            {
+                throw new System.ApplicationException($"SiteHeader with reference name {Constants.SiteHeaderReferenceName} not found.");
+            }
 
             var getSitemapParameters = new GetSitemapParameters()
             {

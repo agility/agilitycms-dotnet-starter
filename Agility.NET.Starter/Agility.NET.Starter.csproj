@@ -18,23 +18,22 @@
     <None Include="wwwroot\assets\agility-preview-logo.svg" />
   </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Agility.NET.FetchAPI" Version="1.0.4" />
-		<PackageReference Include="Agility.NET.Core" Version="1.0.3" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Agility.NET.FetchAPI" Version="1.0.4" />
+  </ItemGroup>
 
   <ItemGroup>
-      <UpToDateCheckBuilt Include="wwwroot/css/site.css" Set="Css" />
-      <UpToDateCheckBuilt Include="postcss.config.js" Set="Css" />
-      <UpToDateCheckBuilt Include="tailwind.config.js" Set="Css" />
-  </ItemGroup> 
+    <UpToDateCheckBuilt Include="wwwroot/css/site.css" Set="Css" />
+    <UpToDateCheckBuilt Include="postcss.config.js" Set="Css" />
+    <UpToDateCheckBuilt Include="tailwind.config.js" Set="Css" />
+  </ItemGroup>
 
-	<Target Name="Package Install" BeforeTargets="Build">
-		<Exec Command="npm install" />
-	</Target>
-	<Target Name="Tailwind" BeforeTargets="Build">
-		<Exec Command="npm run build-tailwind" />
-	</Target>
+  <Target Name="Package Install" BeforeTargets="Build">
+    <Exec Command="npm install" />
+  </Target>
+  <Target Name="Tailwind" BeforeTargets="Build">
+    <Exec Command="npm run build" />
+  </Target>
 
 
 </Project>

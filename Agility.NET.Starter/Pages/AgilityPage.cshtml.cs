@@ -11,65 +11,70 @@ using Microsoft.Extensions.Options;
 
 namespace Agility.NET.Starter.Pages
 {
-    public class AgilityPageModel : PageModel
-    {
-        private readonly FetchApiService _fetchApiService;
-        
-        public PageResponse PageResponse { get; set; }
-        public List<ContentZone> ContentZones { get; set; }
-        public string Locale { get; set; }
-        public SitemapPage SitemapPage { get; set; }
+	public class AgilityPageModel : PageModel
+	{
+		private readonly FetchApiService _fetchApiService;
 
-        public AgilityPageModel(ILogger<AgilityPageModel> logger, IOptions<AppSettings> appSettings, FetchApiService fetchApiService)
-        {
-            _fetchApiService = fetchApiService;
-        }
+		public PageResponse PageResponse { get; set; }
+		public List<ContentZone> ContentZones { get; set; }
+		public string Locale { get; set; }
+		public SitemapPage SitemapPage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
-        {
-            var sitemapPage = (SitemapPage) RouteData.Values["agilityPage"];
+		public AgilityPageModel(ILogger<AgilityPageModel> logger, IOptions<AppSettings> appSettings, FetchApiService fetchApiService)
+		{
+			_fetchApiService = fetchApiService;
+		}
 
-            if (sitemapPage == null) return Page();
+		public async Task<IActionResult> OnGetAsync()
+		{
+			var sitemapPage = (SitemapPage)RouteData.Values["agilityPage"];
 
-            var getPageExpandedParameters = new GetPageParameters()
-            {
-                PageId = sitemapPage.PageID,
-                Locale = sitemapPage.Locale,
-                ExpandAllContentLinks = true,
-                ContentLinkDepth = 0
-            };
+			if (sitemapPage == null) return Page();
 
-            var page = await _fetchApiService.GetTypedPage(getPageExpandedParameters);
+			var getPageExpandedParameters = new GetPageParameters()
+			{
+				PageId = sitemapPage.PageID,
+				Locale = sitemapPage.Locale,
+				ExpandAllContentLinks = true,
+				ContentLinkDepth = 0
+			};
 
-            if (page == null) return Page();
+			var page = await _fetchApiService.GetTypedPage(getPageExpandedParameters);
 
-            page.IsDynamicPage = (page.Dynamic != null);
+			if (page == null) return Page();
 
-            if (page.IsDynamicPage)
-            {
-                page.Name = page.IsDynamicPage ? sitemapPage.Name : page.Name;
-                RouteData.Values["dynamicFields"] = page.Dynamic;
+			page.IsDynamicPage = (page.Dynamic != null);
 
-                var getItemParameters = new GetItemParameters()
-                {
-                    ContentId = sitemapPage.ContentID,
-                    Locale = sitemapPage.Locale,
-                    ContentLinkDepth = 3,
-                    ExpandAllContentLinks = true
-                };
+			if (page.IsDynamicPage)
+			{
+				page.Name = page.IsDynamicPage ? sitemapPage.Name : page.Name;
+				RouteData.Values["dynamicFields"] = page.Dynamic;
 
-                var contentItem = await _fetchApiService.GetContentItem(getItemParameters);
-                RouteData.Values["contentItem"] = contentItem;
-            }
+				var getItemParameters = new GetItemParameters()
+				{
+					ContentId = sitemapPage.ContentID,
+					Locale = sitemapPage.Locale,
+					ContentLinkDepth = 3,
+					ExpandAllContentLinks = true
+				};
+
+				var contentItem = await _fetchApiService.GetContentItem(getItemParameters);
+				RouteData.Values["contentItem"] = contentItem;
+			}
 
 
-            PageResponse = page;
-            Locale = sitemapPage.Locale;
-            ContentZones = page.Zones;
-            SitemapPage = sitemapPage;
+			PageResponse = page;
+			Locale = sitemapPage.Locale;
+			ContentZones = page.Zones;
+			SitemapPage = sitemapPage;
 
-            return Page();
 
-        }
-    }
+			//Set the cache control headers - this is just an example, you can set this to whatever you need
+			//we are caching the page for 60 seconds, and allowing it to be served stale for up to 1 day seconds while we revalidate it
+			Response.Headers["Cache-Control"] = "public, s-maxage=60, stale-while-revalidate=86400";
+
+			return Page();
+
+		}
+	}
 }

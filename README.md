@@ -1,13 +1,13 @@
 # Agility CMS & .NET Starter
 
-To start using the Agility CMS & .NET Starter, [sign up](https://agilitycms.com/free) for a FREE account and create a new Instance using the Blog Template.
+To start using the Agility CMS & .NET Starter, [sign up](https://agilitycms.com/free) for a FREE account and create a new Instance using the DotNet Starter.
 
-[Introduction to .NET and Agility CMS](https://help.agilitycms.com/hc/en-us/articles/4404089239693)
+[Introduction to .NET and Agility CMS](https://agilitycms.com/docs/dotNet)
 
 ## About This Starter
 
 - Uses the latest version of .NET, with greatly improved performance across many components, Language improvements to C# and F#, and much more.
-- Supports full [Page Management](https://help.agilitycms.com/hc/en-us/articles/360055805831)
+- Supports full [Layout Management](https://agilitycms.com/docs/overview/layout-management)
 - Supports Preview Mode
 - Includes an easy-to-use CLI tool that helps you download the Content Models from your Agility CMS instance, and generates the classes of the Content Models for you.
 
@@ -17,50 +17,53 @@ This starter uses [Tailwind CSS](https://tailwindcss.com/), a simple and lightwe
 
 It also comes equipped with [Autoprefixer](https://www.npmjs.com/package/autoprefixer), a plugin which use the data based on current browser popularity and property support to apply CSS prefixes for you.
 
+This project is using Node.js to generate the tailwind css classes.
+
 ## Getting Started
 
-🚨 Before you dive into the code, it's important that you have the latest version of the [.NET SDK](https://dotnet.microsoft.com/download) installed on your machine (>=v7.0), as the project will _not_ run without this.
+🚨 Before you dive into the code, it's important that you have the latest version of the [.NET SDK](https://dotnet.microsoft.com/download) installed on your machine (>=v8.0), as the project will _not_ run without this.
 
 ### Generating/Syncing Content Models from your Agility Instance
 
 1. cd into the `Agility.NET.AgilityCLI` directory.
 2. Rename the `App.config.example` file to `App.config`.
-3. Overwrite the values in the `App.config` file with the values from the API Keys page in [Agility Settings](https://manager.agilitycms.com/settings/apikeys).
+3. Overwrite the values in the `App.config` file with the values from the API Keys page in [Agility Settings](https://app.agilitycms.com/settings/apikeys).
 4. Run `dotnet run update preview` to download the Content Models from your Agility CMS instance, and generate the classes of the Content Models for you.
 
 ### Setting up the Starter
 
 1. cd into the `Agility.NET.Starter` directory.
 2. Rename the `appsetting.json.example` file to `appsettings.json`.
-3. Overwrite the values in the `appsettings.json` file with the credentials from the API Keys page in [Agility Settings](https://manager.agilitycms.com/settings/apikeys).
+3. Overwrite the values in the `appsettings.json` file with the credentials from the API Keys page in [Agility Settings](https://app.agilitycms.com/settings/apikeys).
 
 ## Running the Site Locally
 
-- `dotnet build` => Builds your .NET project.
-- `dotnet run` => Builds & runs your .NET project.
-- `dotnet clean` => Cleans the build outputs of your .NET project.
+- `dotnet build` => Builds the website
+- `dotnet run` => Builds & runs the website
+- `npm run dev & dotnet watch` => Builds and runs the site in Watch mode, so changes are reflected in the browser immediately.
+- `dotnet clean` => Cleans the build outputs of the site
 
 ## How It Works
 
-- [How Pages Work](https://help.agilitycms.com/hc/en-us/articles/4404222849677)
-- [How Page Modules Work](https://help.agilitycms.com/hc/en-us/articles/4404222989453)
-- [How Page Templates Work](https://help.agilitycms.com/hc/en-us/articles/4404229108877)
+- [How Pages/Layouts Work](https://agilitycms.com/docs/dotNet/how-pages-work-in-net)
+- [How Components Work](https://agilitycms.com/docs/dotNet/how-page-modules-work-in-net)
+- [How Layout Models/Templates Work](https://agilitycms.com/docs/dotNet/how-layout-models-work-in-net)
 
-## Deploy to Azure Web App
+## Deploy to Azure App Service
 
 1. Create an Web App (server) to host your application by clicking `Azure Deploy` button below: <br/>
    [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fagility%2Fagilitycms-dotnet-starter%2Fmain%2FAgility.NET.Starter%2Fazuredeploy.json)
 
-2. Deploy your source to Web App by following the steps here [How to Deploy .NET 5.0 Starter to Azure](https://help.agilitycms.com/hc/en-us/articles/4404691689229)
+2. Deploy your source to Web App by following the steps here [How to Deploy the Dotnet Starter to Azure](https://agilitycms.com/docs/dotNet/deploy-net-site-to-azure)
 
 ## Resources
 
 ### Agility CMS
 
 - [Official site](https://agilitycms.com)
-- [Documentation](https://help.agilitycms.com/hc/en-us)
+- [Documentation](https://agilitycms.com/docs)
 
-### .NET 5
+### .NET
 
 - [Official site](https://dotnet.microsoft.com/)
 - [Documentation](https://docs.microsoft.com/en-us/dotnet/)
@@ -72,13 +75,12 @@ It also comes equipped with [Autoprefixer](https://www.npmjs.com/package/autopre
 
 ### Community
 
-- [Official Slack](https://join.slack.com/t/agilitycommunity/shared_invite/enQtNzI2NDc3MzU4Njc2LWI2OTNjZTI3ZGY1NWRiNTYzNmEyNmI0MGZlZTRkYzI3NmRjNzkxYmI5YTZjNTg2ZTk4NGUzNjg5NzY3OWViZGI)
+- [Official Slack](https://agilitycms.com/join-slack)
 - [Blog](https://agilitycms.com/resources/posts)
 - [GitHub](https://github.com/agility)
-- [Forums](https://help.agilitycms.com/hc/en-us/community/topics)
 - [Facebook](https://www.facebook.com/AgilityCMS/)
-- [Twitter](https://twitter.com/AgilityCMS)
+- [X](https://x.com/AgilityCMS)
 
 ## Feedback and Questions
 
-If you have feedback or questions about this starter, please use the [Github Issues](https://github.com/agility/agilitycms-dotnet-starter/issues) on this repo, join our [Community Slack Channel](https://join.slack.com/t/agilitycommunity/shared_invite/enQtNzI2NDc3MzU4Njc2LWI2OTNjZTI3ZGY1NWRiNTYzNmEyNmI0MGZlZTRkYzI3NmRjNzkxYmI5YTZjNTg2ZTk4NGUzNjg5NzY3OWViZGI) or create a post on the [Agility Developer Community](https://help.agilitycms.com/hc/en-us/community/topics).
+If you have feedback or questions about this starter, please use the [Github Issues](https://github.com/agility/agilitycms-dotnet-starter/issues) on this repo, join our [Community Slack Channel](https://agilitycms.com/join-slack).
