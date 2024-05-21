@@ -18,6 +18,14 @@
         "description": "The URL of your repo, or you can deploy the default repo if you like."
       }
     },
+    "branch": {
+      "type": "string",
+      "defaultValue": "main",
+      "minLength": 2,
+      "metadata": {
+        "description": "The branch to deploy, default main."
+      }
+    },
     "sku": {
       "type": "string",
       "defaultValue": "F1",
@@ -177,7 +185,7 @@
           ],
           "properties": {
             "repoUrl": "[parameters('repoUrl')]",
-            "branch": "master",
+            "branch": "[parameters('branch')]",
             "isManualIntegration": true
           }
         }
