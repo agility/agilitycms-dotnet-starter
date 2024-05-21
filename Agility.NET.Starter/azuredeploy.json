@@ -10,6 +10,14 @@
         "description": "Web app name."
       }
     },
+    "repoUrl": {
+      "type": "string",
+      "defaultValue": "https://github.com/agility/agilitycms-dotnet-starter",
+      "minLength": 2,
+      "metadata": {
+        "description": "The URL of your repo, or you can deploy the default repo if you like."
+      }
+    },
     "sku": {
       "type": "string",
       "defaultValue": "F1",
@@ -168,7 +176,7 @@
             "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
           ],
           "properties": {
-            "repoUrl": "https://github.com/Azure-Samples/app-service-web-dotnet-get-started",
+            "repoUrl": "[parameters('repoUrl')]",
             "branch": "master",
             "isManualIntegration": true
           }
