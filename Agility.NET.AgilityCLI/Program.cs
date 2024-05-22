@@ -24,7 +24,7 @@ namespace Agility.NET.AgilityCLI
                 Console.ForegroundColor = ConsoleColor.Green;
 
                 var instanceGUID = ConfigurationManager.AppSettings["InstanceGUID"];
-                var websiteName = ConfigurationManager.AppSettings["WebsiteName"];
+
                 var fetchAPIKey = ConfigurationManager.AppSettings["FetchAPIKey"];
                 var previewAPIKey = ConfigurationManager.AppSettings["PreviewAPIKey"];
                 var path = ConfigurationManager.AppSettings["Path"];
@@ -37,7 +37,7 @@ namespace Agility.NET.AgilityCLI
                 client.AddDefaultHeader("accept", "application/json");
                 client.AddDefaultHeader("APIKey", apiKey ?? string.Empty);
 
-                Console.WriteLine($@"Downloading content definitions from Agility website: {websiteName} GUID: {instanceGUID}...");
+                Console.WriteLine($@"Downloading content definitions from Agility instance GUID: {instanceGUID}...");
                 Console.ForegroundColor = ConsoleColor.Blue;
 
                 var request = new RestRequest("/contentmodels", Method.Get);

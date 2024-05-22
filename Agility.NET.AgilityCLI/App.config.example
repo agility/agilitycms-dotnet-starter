@@ -2,7 +2,6 @@
 <configuration>
 	<appSettings>
 		<add key="InstanceGUID" value="" />
-		<add key="WebsiteName" value="" />
 		<add key="FetchAPIKey" value="" />
 		<add key="PreviewAPIKey" value="" />
 		<add key="Path" value="{PATH TO PROJECT}\Models\AgilityModels.cs" />
