@@ -29,10 +29,10 @@
   </ItemGroup>
 
   <Target Name="Package Install" BeforeTargets="Build">
-    <Exec Command="npm install" />
+    <Exec Command="npm install" IgnoreExitCode="true"/>
   </Target>
   <Target Name="Tailwind" BeforeTargets="Build">
-    <Exec Command="npm run build" />
+    <Exec Command="npm run build" IgnoreExitCode="true"/>
   </Target>
 
 
