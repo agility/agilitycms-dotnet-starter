@@ -8,6 +8,8 @@ Agility.NET.AgilityCLI/bin
 Agility.NET.AgilityCLI/obj
 Agility.NET.Starter/.vs
 
+.vs
+
 Agility.NET.Starter/appsettings.json
 Agility.NET.AgilityCLI/App.config
 Agility.NET.Starter/wwwroot/css/output.css
