@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Agility.NET.Starter.ViewComponents.PageModules
 {
-    public class TextBlockWithImage: ViewComponent
+    public class TextBlockWithImage : ViewComponent
     {
         private readonly FetchApiService _fetchApiService;
 
@@ -18,12 +18,12 @@ namespace Agility.NET.Starter.ViewComponents.PageModules
 
         public async Task<IViewComponentResult> InvokeAsync(ModuleModel moduleModel)
         {
-            var getParams = new GetItemParameters
+            var textBlockWithImage = await _fetchApiService.GetTypedContentItem<Agility.Models.TextBlockWithImage>(new GetItemParameters
             {
                 ContentId = moduleModel.Model.Item.ContentID,
-                Locale = moduleModel.Locale
-            };
-            var textBlockWithImage = await _fetchApiService.GetTypedContentItem<Agility.Models.TextBlockWithImage>(getParams);
+                Locale = moduleModel.Locale,
+                IsPreview = Util.Helpers.PreviewHelpers.IsPreviewMode(HttpContext)
+            });
             return View("/Views/PageModules/TextBlockWithImage.cshtml", textBlockWithImage);
         }
     }

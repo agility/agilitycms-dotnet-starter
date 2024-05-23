@@ -1,3 +1,4 @@
+using System;
 using Agility.NET.FetchAPI.Helpers;
 using Agility.NET.FetchAPI.Services;
 using Agility.NET.Starter.Util.Middleware;
@@ -37,6 +38,7 @@ namespace Agility.NET.Starter
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

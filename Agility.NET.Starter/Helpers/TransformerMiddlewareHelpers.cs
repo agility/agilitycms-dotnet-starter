@@ -16,20 +16,20 @@ namespace Agility.NET.Starter.Util.Helpers
 {
     public static class TransformerMiddlewareHelpers
     {
-        public static async Task<List<SitemapPage>> GetSitemapPages(AppSettings appSettings, FetchApiService fetchApiService)
+        public static async Task<List<SitemapPage>> GetSitemapPages(AppSettings appSettings, FetchApiService fetchApiService, bool isPreview)
         {
             var sitemapPages = new List<SitemapPage>();
             var locales = appSettings.Locales.Split(",");
 
             foreach (var locale in locales)
             {
-                var getSitemapFlatParameters = new GetSitemapParameters()
+
+                var result = await fetchApiService.GetSitemapFlat(new GetSitemapParameters()
                 {
                     Locale = locale,
-                    ChannelName = appSettings.ChannelName
-                };
-
-                var result = await fetchApiService.GetSitemapFlat(getSitemapFlatParameters);
+                    ChannelName = appSettings.ChannelName,
+                    IsPreview = isPreview
+                });
                 var deserializedResult = DynamicHelpers.DeserializeSitemapFlat(result);
 
                 deserializedResult.ForEach(s => s.Locale = locale);
@@ -42,12 +42,11 @@ namespace Agility.NET.Starter.Util.Helpers
 
         public static async Task<UrlRedirectionsResponse> GetUrlRedirects(FetchApiService fetchApiService)
         {
-            var getUrlRedirectionsParameters = new GetUrlRedirectionsParameters()
+
+            var result = await fetchApiService.GetUrlRedirections(new GetUrlRedirectionsParameters()
             {
                 LastAccessDate = DateTime.Now
-            };
-
-            var result = await fetchApiService.GetUrlRedirections(getUrlRedirectionsParameters);
+            });
             return DynamicHelpers.DeserializeTo<UrlRedirectionsResponse>(result);
         }
 
@@ -83,22 +82,27 @@ namespace Agility.NET.Starter.Util.Helpers
         {
             SetAgilityPreviewKeyIfValid(httpContextAccessor, appSettings);
 
+            bool isPreview = PreviewHelpers.IsPreviewMode(httpContextAccessor);
+
             if (env.IsDevelopment())
             {
-                return await GetSitemapPages(appSettings, fetchApiService);
+                //force preview mode in development
+                PreviewHelpers.SetPreviewMode(httpContextAccessor, true);
+                isPreview = true;
+
             }
 
-            var isPreview = HttpContextHelpers.IsPreview(httpContextAccessor);
-            if (isPreview == "true")
+
+            if (isPreview)
             {
-                return await GetSitemapPages(appSettings, fetchApiService);
+                return await GetSitemapPages(appSettings, fetchApiService, isPreview: true);
             }
 
             var key = Constants.SitemapPagesKey;
 
             if (cache.TryGetValue(key, out List<SitemapPage> cachedSitemapPages)) return cachedSitemapPages;
 
-            var sitemapPages = await GetSitemapPages(appSettings, fetchApiService);
+            var sitemapPages = await GetSitemapPages(appSettings, fetchApiService, isPreview: false);
 
             var cacheExpirationOptions = new MemoryCacheEntryOptions
             {
@@ -125,8 +129,9 @@ namespace Agility.NET.Starter.Util.Helpers
                 return await GetUrlRedirects(fetchApiService);
             }
 
-            var isPreview = HttpContextHelpers.IsPreview(httpContextAccessor);
-            if (isPreview == "true")
+            bool isPreview = PreviewHelpers.IsPreviewMode(httpContextAccessor);
+
+            if (isPreview)
             {
                 return await GetUrlRedirects(fetchApiService);
             }
@@ -156,9 +161,20 @@ namespace Agility.NET.Starter.Util.Helpers
                 .ToString();
 
             if (!string.IsNullOrEmpty(agilityPreviewKey)
-                && agilityPreviewKey == HttpContextHelpers.GenerateAgilityPreviewKey(appSettings.SecurityKey))
+                && agilityPreviewKey == Agility.NET.FetchAPI.Helpers.PreviewHelpers.GenerateAgilityPreviewKey(appSettings.SecurityKey))
             {
-                HttpContextHelpers.SetPreviewCookie(httpContextAccessor);
+                //we are kicking into preview mode
+                // Set the preview cookie
+                PreviewHelpers.SetPreviewCookie(httpContextAccessor);
+
+                // Set the IsPreview flag in the HttpContext
+                PreviewHelpers.SetPreviewMode(httpContextAccessor, true);
+            }
+            else if (PreviewHelpers.CheckPreviewCookie(httpContextAccessor))
+            {
+                //if the preview cookie is already set, we are in preview mode
+                // Set the IsPreview flag in the HttpContext
+                PreviewHelpers.SetPreviewMode(httpContextAccessor, true);
             }
         }
 

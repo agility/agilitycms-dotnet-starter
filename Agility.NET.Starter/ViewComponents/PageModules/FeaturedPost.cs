@@ -2,38 +2,46 @@
 using Agility.Models;
 using Agility.NET.FetchAPI.Helpers;
 using Agility.NET.FetchAPI.Models;
+using Agility.NET.FetchAPI.Models.API;
 using Agility.NET.FetchAPI.Models.Data;
 using Agility.NET.FetchAPI.Services;
+using Agility.NET.Starter.Util.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Agility.NET.Starter.ViewComponents.PageModules
 {
-    public class FeaturedPost: ViewComponent
-    {
-        private readonly FetchApiService _fetchApiService;
+	public class FeaturedPost : ViewComponent
+	{
+		private readonly FetchApiService _fetchApiService;
 
-        public FeaturedPost(FetchApiService fetchApiService)
-        {
-            _fetchApiService = fetchApiService;
-        }
+		public FeaturedPost(FetchApiService fetchApiService)
+		{
+			_fetchApiService = fetchApiService;
+		}
 
-        public async Task<IViewComponentResult> InvokeAsync(ModuleModel moduleModel)
-        {
-            var getParams = new GetItemParameters
-            {
-                ContentId = moduleModel.Model.Item.ContentID,
-                Locale = moduleModel.Locale
-            };
+		public async Task<IViewComponentResult> InvokeAsync(ModuleModel moduleModel)
+		{
 
-            var featuredPostModel = await _fetchApiService.GetTypedContentItem<FeaturedPost_Model>(getParams);
+			//get this component
+			var component = await _fetchApiService.GetTypedContentItem<FeaturedPost_Model>(new GetItemParameters
+			{
+				ContentId = moduleModel.Model.Item.ContentID,
+				Locale = moduleModel.Locale,
+				IsPreview = Util.Helpers.PreviewHelpers.IsPreviewMode(HttpContext)
+			});
 
-            var featuredPostContentId = int.Parse(featuredPostModel.Fields.FeaturedPost_ValueField);
-            
-            getParams.ContentId = featuredPostContentId;
+			//get the content id of the featured post
+			var featuredPostContentId = int.Parse(component.Fields.FeaturedPost_ValueField);
 
-            var featuredPost = await _fetchApiService.GetTypedContentItem<Post>(getParams);
+			var featuredPost = await _fetchApiService.GetTypedContentItem<Post>(new GetItemParameters
+			{
+				ContentId = featuredPostContentId,
+				Locale = moduleModel.Locale,
+				IsPreview = Util.Helpers.PreviewHelpers.IsPreviewMode(HttpContext),
+				ContentLinkDepth = 2
+			});
 
-            return View("/Views/PageModules/FeaturedPost.cshtml", featuredPost);
-        }
-    }
+			return View("/Views/PageModules/FeaturedPost.cshtml", featuredPost);
+		}
+	}
 }

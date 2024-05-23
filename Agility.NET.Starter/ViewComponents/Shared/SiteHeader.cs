@@ -26,13 +26,14 @@ namespace Agility.NET.Starter.ViewComponents.Shared
         public async Task<IViewComponentResult> InvokeAsync(string locale)
         {
 
-
             var siteHeaderResponse = await _fetchApiService.GetTypedContentList<Agility.Models.SiteHeader>(new GetListParameters()
             {
                 ReferenceName = Constants.SiteHeaderReferenceName,
                 Locale = locale,
                 Take = 1,
-                ContentLinkDepth = 0
+                ContentLinkDepth = 0,
+                IsPreview = Util.Helpers.PreviewHelpers.IsPreviewMode(HttpContext)
+
             });
 
             var siteHeader = siteHeaderResponse.Items.FirstOrDefault();
@@ -41,13 +42,13 @@ namespace Agility.NET.Starter.ViewComponents.Shared
                 throw new System.ApplicationException($"SiteHeader with reference name {Constants.SiteHeaderReferenceName} not found.");
             }
 
-            var getSitemapParameters = new GetSitemapParameters()
+            var sitemap = await _fetchApiService.GetTypedSitemapFlat(new GetSitemapParameters()
             {
                 ChannelName = _appSettings.ChannelName,
-                Locale = locale
-            };
+                Locale = locale,
+                IsPreview = Util.Helpers.PreviewHelpers.IsPreviewMode(HttpContext)
+            });
 
-            var sitemap = await _fetchApiService.GetTypedSitemapFlat(getSitemapParameters);
             sitemap = sitemap.Where(s => !string.IsNullOrEmpty(s.Name) && s.Visible.Menu).ToList();
 
             var siteHeaderModel = new SiteHeaderModel()

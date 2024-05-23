@@ -17,12 +17,13 @@ namespace Agility.NET.Starter.ViewComponents.PageModules
         }
         public async Task<IViewComponentResult> InvokeAsync(ModuleModel moduleModel)
         {
-            var getParams = new GetItemParameters
+
+            var richTextArea = await _fetchApiService.GetTypedContentItem<Agility.Models.RichTextArea>(new GetItemParameters
             {
                 ContentId = moduleModel.Model.Item.ContentID,
-                Locale = moduleModel.Locale
-            };
-            var richTextArea = await _fetchApiService.GetTypedContentItem<Agility.Models.RichTextArea>(getParams);
+                Locale = moduleModel.Locale,
+                IsPreview = Util.Helpers.PreviewHelpers.IsPreviewMode(HttpContext)
+            });
             return View("/Views/PageModules/RichTextArea.cshtml", richTextArea);
         }
     }

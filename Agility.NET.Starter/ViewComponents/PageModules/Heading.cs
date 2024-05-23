@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Agility.NET.Starter.ViewComponents.PageModules
 {
 
-    public class Heading: ViewComponent
+    public class Heading : ViewComponent
     {
         private readonly FetchApiService _fetchApiService;
 
@@ -18,12 +18,13 @@ namespace Agility.NET.Starter.ViewComponents.PageModules
         }
         public async Task<IViewComponentResult> InvokeAsync(ModuleModel moduleModel)
         {
-            var getParams = new GetItemParameters
+
+            var heading = await _fetchApiService.GetTypedContentItem<Agility.Models.Heading>(new GetItemParameters
             {
                 ContentId = moduleModel.Model.Item.ContentID,
-                Locale = moduleModel.Locale
-            };
-            var heading = await _fetchApiService.GetTypedContentItem<Agility.Models.Heading>(getParams);
+                Locale = moduleModel.Locale,
+                IsPreview = Util.Helpers.PreviewHelpers.IsPreviewMode(HttpContext)
+            });
             return View("/Views/PageModules/Heading.cshtml", heading);
         }
     }

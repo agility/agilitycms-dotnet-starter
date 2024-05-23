@@ -5,51 +5,51 @@
 @model NET.Starter.Pages.AgilityPageModel
 
 @{
-    Layout = PageHelpers.GetPageTemplatePath(Model.PageResponse.TemplateName);
-    var scripts = Model.PageResponse.Scripts;
+	Layout = PageHelpers.GetPageTemplatePath(Model.PageResponse.TemplateName);
+	var scripts = Model.PageResponse.Scripts;
 }
 
 @{
 
-    DefineSection("SEO", async () =>
-    {
-        Write(await Component.InvokeAsync("SEO", Model.PageResponse));
-    });
+	DefineSection("SEO", async () =>
+	{
+		Write(await Component.InvokeAsync("SEO", Model));
+	});
 }
 
 @if (!string.IsNullOrEmpty(scripts.Top))
 {
-    @Html.Raw($"<script>{scripts.Top}</script>")
+	@Html.Raw($"<script>{scripts.Top}</script>")
 }
 
 @{
-    DefineSection("TopZone", async () =>
-    {
-        Write(await Component.InvokeAsync("SiteHeader", Model.Locale));
-    });
+	DefineSection("TopZone", async () =>
+	{
+		Write(await Component.InvokeAsync("SiteHeader", Model.Locale));
+	});
 }
 
 @foreach (var contentZone in Model.ContentZones)
 {
-    DefineSection(contentZone.ReferenceName, async () =>
-    {
+	DefineSection(contentZone.ReferenceName, async () =>
+	{
 
-        foreach (var model in contentZone.Modules)
-        {
-            var moduleModel = new ModuleModel()
-            {
-                Locale = Model.Locale,
-                Module = model?.Item?.Fields?.ToString() ?? "",
-                Model = model,
-                SitemapPage = Model.SitemapPage
-            };
+		foreach (var model in contentZone.Modules)
+		{
+			var moduleModel = new ModuleModel()
+						{
+							Locale = Model.Locale,
+							Module = model?.Item?.Fields?.ToString() ?? "",
+							Model = model,
+							SitemapPage = Model.SitemapPage
+						};
 
-            Write(await Component.InvokeAsync(model.Module, moduleModel));
-        }
-    });
+			Write(await Component.InvokeAsync(model.Module, moduleModel));
+		}
+	});
 }
 
 @if (!string.IsNullOrEmpty(scripts.Bottom))
 {
-    @Html.Raw($"<script>{scripts.Bottom}</script>")
+	@Html.Raw($"<script>{scripts.Bottom}</script>")
 }
