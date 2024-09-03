@@ -4,8 +4,8 @@
 @using Agility.NET.FetchAPI.Models.API
 @model ContentItemResponse<Agility.Models.RichTextArea>
 
-<div class="relative px-8">
+<div class="relative px-8" data-agility-component={"INSERT_CONTENT_ID_HERE"}>
     <div class="max-w-2xl mx-auto my-12 md:mt-18 lg:mt-20">
-        <div class="prose max-w-full mx-auto">@Html.Raw(Utility.CleanHtml(Model.Fields.TextBlob))</div>
+        <div data-agility-field="textblob" data-agility-html="true" class="prose max-w-full mx-auto">@Html.Raw(Utility.CleanHtml(Model.Fields.TextBlob))</div>
     </div>
 </div>
