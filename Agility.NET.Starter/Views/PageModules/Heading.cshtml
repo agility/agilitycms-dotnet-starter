@@ -3,7 +3,7 @@
 @using Agility.NET.FetchAPI.Models.API
 @model ContentItemResponse<Agility.Models.Heading>
 
-<div class="relative px-8" data-agility-component="INSERT_CONTENT_ID_HERE">
+<div class="relative px-8" data-agility-component="@Model.ContentID">
 	<div class="max-w-screen-xl mx-auto my-12 md:mt-18 lg:mt-20">
 		<h1 data-agility-field="title" class="font-display text-secondary-500 text-4xl font-black tracking-wide">
 			@Model.Fields.Title

@@ -3,7 +3,7 @@
 @using Agility.NET.FetchAPI.Models.API
 @model ContentItemResponse<Post>
 
-<div class="relative px-8" data-agility-component="INSERT_CONTENT_ID_HERE">
+<div class="relative px-8" data-agility-component={@Model.ContentID}>
 	<div class="max-w-screen-xl mx-auto">
 		<div class="h-64 md:h-96 relative overflow-hidden">
 			<img  data-agility-field="image" src="@Model.Fields.Image.Url"

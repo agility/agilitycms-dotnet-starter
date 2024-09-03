@@ -3,7 +3,7 @@
 @using Agility.NET.FetchAPI.Models.API
 @model ContentItemResponse<Agility.Models.TextBlockWithImage>
 
-<div data-agility-component={"INSERT_CONTENT_ID_HERE"} class="relative px-8">
+<div data-agility-component={@Model.ContentID} class="relative px-8">
 	<div class="flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center">
 		<div class="md:w-6/12 flex-shrink-0 relative">
 			@{
