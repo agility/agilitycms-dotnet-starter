@@ -31,10 +31,11 @@
             window.addEventListener('load', renderOnLoad);
         }
     </script>
+    <script src="https://unpkg.com/@@agility/web-studio-sdk@latest/dist/index.js"> </script>
     @await RenderSectionAsync("SEO")
 </head>
 
-<body>
+<body data-agility-guid="INSERT_GUID_HERE">
     <div id="site-wrapper">
         <div id="site">
             @await Component.InvokeAsync("PreviewBar")
