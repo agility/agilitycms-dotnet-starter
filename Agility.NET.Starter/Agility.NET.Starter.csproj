@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <Content Include="appsettings.Development.json.example" />
-    <Content Include="appsettings.json.example" />
+	<Content Include="appsettings.json.example" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Agility.NET.FetchAPI" Version="2.0.0" />
+    <PackageReference Include="Agility.NET.FetchAPI" Version="2.1.0" />
   </ItemGroup>
 
   <Target Name="Package Install" BeforeTargets="Build">
