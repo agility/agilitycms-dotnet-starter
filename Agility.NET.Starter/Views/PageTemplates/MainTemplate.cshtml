@@ -31,16 +31,18 @@
             window.addEventListener('load', renderOnLoad);
         }
     </script>
+    <script src="https://unpkg.com/@@agility/web-studio-sdk@latest/dist/index.js"> </script>
+    
     @await RenderSectionAsync("SEO")
 </head>
-
-<body>
+@* TODO: Rpleace this with your instance's guid *@
+<body data-agility-guid="INSERT_GUID_HERE">
     <div id="site-wrapper">
         <div id="site">
             @await Component.InvokeAsync("PreviewBar")
             <div class="flex flex-col min-h-screen">
                 @await RenderSectionAsync("TopZone")
-                <main class="flex-grow">
+                <main class="flex-grow" data-agility-page={@Model.}>
                     @await RenderSectionAsync("MainContentZone")
                 </main>
                 @await Component.InvokeAsync("SiteFooter")

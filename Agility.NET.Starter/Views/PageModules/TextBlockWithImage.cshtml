@@ -3,14 +3,15 @@
 @using Agility.NET.FetchAPI.Models.API
 @model ContentItemResponse<Agility.Models.TextBlockWithImage>
 
-<div class="relative px-8">
+<div data-agility-component={@Model.ContentID} class="relative px-8">
 	<div class="flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center">
 		<div class="md:w-6/12 flex-shrink-0 relative">
 			@{
 				if (@Model.Fields.PrimaryButton != null)
 				{
 					<a href="@Model.Fields.PrimaryButton.Href"
-					   aria-label="Go to @Model.Fields.Tagline">
+					   aria-label="Go to @Model.Fields.Tagline"
+						 data-agility-field="primaryButton">
 						<img src="@Model.Fields.Image.Url"
 							 alt="@Model.Fields.Image.Label"
 							 style="width: 768px; height: 420px;"
@@ -30,15 +31,15 @@
 			<div class="g:py-8 text-center md:text-left">
 				@if (!string.IsNullOrEmpty(Model.Fields.Tagline))
 				{
-					<span class="font-bold text-primary-500 text-sm text-center md:text-left uppercase">
+					<span data-agility-field="tagline" class="font-bold text-primary-500 text-sm text-center md:text-left uppercase">
 						@Model.Fields.Tagline
 					</span>
 				}
 
-				<h2 class="font-display text-4xl font-black text-secondary-500 md:text-3xl lg:text-5xl tracking-wide text-center mt-4 lg:leading-tight md:text-left">
+				<h2 data-agility-field="title" class="font-display text-4xl font-black text-secondary-500 md:text-3xl lg:text-5xl tracking-wide text-center mt-4 lg:leading-tight md:text-left">
 					@Model.Fields.Title
 				</h2>
-				<p class="mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-200">
+				<p data-agility-field="content" class="mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-200">
 					@Html.Raw(Model.Fields.Content)
 				</p>
 				@if (Model.Fields.PrimaryButton != null)
