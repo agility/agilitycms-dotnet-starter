@@ -9,7 +9,6 @@ To start using the Agility CMS & .NET Starter, [sign up](https://agilitycms.com/
 - Uses the latest version of .NET, with greatly improved performance across many components, Language improvements to C# and F#, and much more.
 - Supports full [Layout Management](https://agilitycms.com/docs/overview/layout-management)
 - Supports Preview Mode
-- Includes an easy-to-use CLI tool that helps you download the Content Models from your Agility CMS instance, and generates the classes of the Content Models for you.
 
 ### Tailwind CSS
 
@@ -22,13 +21,6 @@ This project is using Node.js to generate the tailwind css classes.
 ## Getting Started
 
 🚨 Before you dive into the code, it's important that you have the latest version of the [.NET SDK](https://dotnet.microsoft.com/download) installed on your machine (>=v8.0), as the project will _not_ run without this.
-
-### Generating/Syncing Content Models from your Agility Instance
-
-1. cd into the `Agility.NET.AgilityCLI` directory.
-2. Rename the `App.config.example` file to `App.config`.
-3. Overwrite the values in the `App.config` file with the values from the API Keys page in [Agility Settings](https://app.agilitycms.com/settings/apikeys).
-4. Run `dotnet run update preview` to download the Content Models from your Agility CMS instance, and generate the classes of the Content Models for you.
 
 ### Setting up the Starter
 
