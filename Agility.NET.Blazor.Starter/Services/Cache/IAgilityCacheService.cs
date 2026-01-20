@@ -1,4 +1,4 @@
-namespace Agility.Net.Blazor.Starter.Services.Cache;
+namespace Agility.NET.Blazor.Starter.Services.Cache;
 
 /// <summary>
 /// Service for centralized caching of Agility CMS data with tag-based invalidation support.

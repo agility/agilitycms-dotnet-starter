@@ -1,7 +1,7 @@
 using Agility.NET.FetchAPI.Models.API;
-using Agility.Net.Blazor.Starter.Services.Agility;
+using Agility.NET.Blazor.Starter.Services.Agility;
 
-namespace Agility.Net.Blazor.Starter.Middleware;
+namespace Agility.NET.Blazor.Starter.Middleware;
 
 public class AgilityRedirectMiddleware
 {

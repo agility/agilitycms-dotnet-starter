@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace Agility.Net.Blazor.Starter.Util;
+namespace Agility.NET.Blazor.Starter.Util;
 
 public static class Constants
 {

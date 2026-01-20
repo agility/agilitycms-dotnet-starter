@@ -1,9 +1,9 @@
 using Agility.NET.FetchAPI.Helpers;
 using Agility.NET.FetchAPI.Models.API;
 using Agility.NET.FetchAPI.Models.Data;
-using Agility.Net.Blazor.Starter.Services.Cache;
+using Agility.NET.Blazor.Starter.Services.Cache;
 
-namespace Agility.Net.Blazor.Starter.Services.Agility;
+namespace Agility.NET.Blazor.Starter.Services.Agility;
 
 public partial class AgilityService
 {

@@ -1,6 +1,6 @@
-using Agility.Net.Blazor.Starter.Services.Cache;
+using Agility.NET.Blazor.Starter.Services.Cache;
 
-namespace Agility.Net.Blazor.Starter.Endpoints;
+namespace Agility.NET.Blazor.Starter.Endpoints;
 
 /// <summary>
 /// Request model for the revalidate webhook from Agility CMS.

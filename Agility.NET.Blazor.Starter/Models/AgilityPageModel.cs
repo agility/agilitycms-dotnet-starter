@@ -1,7 +1,7 @@
 using Agility.NET.FetchAPI.Models.API;
 using Agility.NET.FetchAPI.Models.Data;
 
-namespace Agility.Net.Blazor.Starter.Models;
+namespace Agility.NET.Blazor.Starter.Models;
 
 public class AgilityPageModel
 {

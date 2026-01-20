@@ -41,7 +41,7 @@ Example: `PostsListing/`
 ## Project Structure
 
 ```
-Agility.Net.Blazor.Starter/
+Agility.NET.Blazor.Starter/
 ├── Components/
 │   ├── AgilityComponents/        # Agility CMS components (content modules)
 │   │   ├── FeaturedPost.razor
@@ -238,7 +238,7 @@ To add a new interactive component:
 3. **Add namespace** to `_Imports.razor`:
 
 ```razor
-@using Agility.Net.Blazor.Starter.Components.AgilityComponents.MyFeature
+@using Agility.NET.Blazor.Starter.Components.AgilityComponents.MyFeature
 ```
 
 4. **Register** in `AgilityComponent.razor`:

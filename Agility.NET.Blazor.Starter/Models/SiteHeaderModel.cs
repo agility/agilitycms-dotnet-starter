@@ -1,7 +1,7 @@
 using Agility.Models;
 using Agility.NET.FetchAPI.Models.API;
 
-namespace Agility.Net.Blazor.Starter.Models;
+namespace Agility.NET.Blazor.Starter.Models;
 
 public class SiteHeaderModel
 {

@@ -1,4 +1,4 @@
-namespace Agility.Net.Blazor.Starter.Services.Cache;
+namespace Agility.NET.Blazor.Starter.Services.Cache;
 
 /// <summary>
 /// Centralized cache key/tag generation for Agility CMS data.

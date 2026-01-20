@@ -1,10 +1,10 @@
 using Agility.NET.FetchAPI.Helpers;
 using Agility.NET.FetchAPI.Services;
-using Agility.Net.Blazor.Starter.Components;
-using Agility.Net.Blazor.Starter.Endpoints;
-using Agility.Net.Blazor.Starter.Middleware;
-using Agility.Net.Blazor.Starter.Services.Agility;
-using Agility.Net.Blazor.Starter.Services.Cache;
+using Agility.NET.Blazor.Starter.Components;
+using Agility.NET.Blazor.Starter.Endpoints;
+using Agility.NET.Blazor.Starter.Middleware;
+using Agility.NET.Blazor.Starter.Services.Agility;
+using Agility.NET.Blazor.Starter.Services.Cache;
 using Microsoft.AspNetCore.DataProtection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +21,7 @@ builder.Services.AddRazorComponents()
 // This prevents 403 errors from stale antiforgery cookies
 builder.Services.AddDataProtection()
     .PersistKeysToFileSystem(new DirectoryInfo(Path.Combine(builder.Environment.ContentRootPath, "keys")))
-    .SetApplicationName("Agility.Net.Blazor.Starter");
+    .SetApplicationName("Agility.NET.Blazor.Starter");
 
 // Configure Agility CMS settings
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));

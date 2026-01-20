@@ -1,4 +1,4 @@
-namespace Agility.Net.Blazor.Starter.Models;
+namespace Agility.NET.Blazor.Starter.Models;
 
 /// <summary>
 /// Display item that can hold either real post data or phantom data for infinite scroll demo

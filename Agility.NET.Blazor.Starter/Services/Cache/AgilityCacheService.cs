@@ -3,7 +3,7 @@ using Agility.NET.FetchAPI.Helpers;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 
-namespace Agility.Net.Blazor.Starter.Services.Cache;
+namespace Agility.NET.Blazor.Starter.Services.Cache;
 
 /// <summary>
 /// Centralized caching service for Agility CMS data with tag-based invalidation support.

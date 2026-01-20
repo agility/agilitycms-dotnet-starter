@@ -5,7 +5,7 @@ This monorepo contains two .NET starter projects for Agility CMS:
 | Project | Description | Framework |
 |---------|-------------|-----------|
 | [Agility.NET.Starter](./Agility.NET.Starter/) | Razor Pages implementation | ASP.NET Core Razor Pages |
-| [Agility.Net.Blazor.Starter](./Agility.Net.Blazor.Starter/) | Blazor SSR implementation | Blazor Server-Side Rendering |
+| [Agility.NET.Blazor.Starter](./Agility.NET.Blazor.Starter/) | Blazor SSR implementation | Blazor Server-Side Rendering |
 
 To start using these starters, [sign up](https://agilitycms.com/free) for a FREE account and create a new Instance using the DotNet Starter.
 
@@ -25,7 +25,7 @@ Both starters share the same features:
 
 - **Razor Pages** (`Agility.NET.Starter`): Traditional server-rendered pages with the familiar Razor syntax. Great for SEO and simpler applications.
 
-- **Blazor SSR** (`Agility.Net.Blazor.Starter`): Server-side rendered Blazor components. Enables component-based architecture while maintaining server-side rendering benefits.
+- **Blazor SSR** (`Agility.NET.Blazor.Starter`): Server-side rendered Blazor components. Enables component-based architecture while maintaining server-side rendering benefits.
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ Before you dive into the code, ensure you have:
 See the README in each project folder for specific setup instructions:
 
 - [Razor Pages Starter README](./Agility.NET.Starter/README.md)
-- [Blazor SSR Starter README](./Agility.Net.Blazor.Starter/README.md)
+- [Blazor SSR Starter README](./Agility.NET.Blazor.Starter/README.md)
 
 ## Agility CMS Terminology
 

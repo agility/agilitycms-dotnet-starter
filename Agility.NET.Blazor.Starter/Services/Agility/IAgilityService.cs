@@ -1,8 +1,8 @@
-using Agility.Net.Blazor.Starter.Models;
+using Agility.NET.Blazor.Starter.Models;
 using Agility.NET.FetchAPI.Models.API;
 using Agility.NET.FetchAPI.Models.Data;
 
-namespace Agility.Net.Blazor.Starter.Services.Agility;
+namespace Agility.NET.Blazor.Starter.Services.Agility;
 
 public interface IAgilityService
 {

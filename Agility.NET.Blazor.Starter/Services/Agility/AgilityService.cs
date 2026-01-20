@@ -1,10 +1,10 @@
 using Agility.NET.FetchAPI.Helpers;
 using Agility.NET.FetchAPI.Services;
-using Agility.Net.Blazor.Starter.Services.Cache;
-using Agility.Net.Blazor.Starter.Util;
+using Agility.NET.Blazor.Starter.Services.Cache;
+using Agility.NET.Blazor.Starter.Util;
 using Microsoft.Extensions.Options;
 
-namespace Agility.Net.Blazor.Starter.Services.Agility;
+namespace Agility.NET.Blazor.Starter.Services.Agility;
 
 /// <summary>
 /// Main service for interacting with Agility CMS.

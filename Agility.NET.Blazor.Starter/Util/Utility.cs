@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace Agility.Net.Blazor.Starter.Util;
+namespace Agility.NET.Blazor.Starter.Util;
 
 public static partial class Utility
 {

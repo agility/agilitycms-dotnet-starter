@@ -1,7 +1,7 @@
 using Agility.NET.FetchAPI.Helpers;
 using Microsoft.Extensions.Options;
 
-namespace Agility.Net.Blazor.Starter.Middleware;
+namespace Agility.NET.Blazor.Starter.Middleware;
 
 /// <summary>
 /// Configuration options for CDN cache control headers.
