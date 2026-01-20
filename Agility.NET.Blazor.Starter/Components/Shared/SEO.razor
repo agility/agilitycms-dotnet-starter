@@ -1,0 +1,36 @@
+@using Agility.NET.FetchAPI.Helpers
+
+<PageTitle>@(SitemapPage?.Title ?? "My Travel Blog") | My Travel Blog</PageTitle>
+
+<HeadContent>
+    <meta name="generator" content="Agility CMS" />
+    <meta name="agility_timestamp" content="@DateTime.Now" />
+
+    @if (PageResponse?.IsDynamicPage == true && !string.IsNullOrEmpty(ContentItem))
+    {
+        var post = DynamicHelpers.DeserializeContentItemTo<Post>(ContentItem);
+        if (post?.SEO != null)
+        {
+            <meta name="description" content="@post.SEO.MetaDescription" />
+            <meta name="keywords" content="@post.SEO.MetaKeywords" />
+            @((MarkupString)(post.SEO.MetaHTML ?? string.Empty))
+        }
+    }
+    else if (PageResponse?.SEO != null)
+    {
+        <meta name="description" content="@PageResponse.SEO.MetaDescription" />
+        <meta name="keywords" content="@PageResponse.SEO.MetaKeywords" />
+        @((MarkupString)(PageResponse.SEO.MetaHTML ?? string.Empty))
+    }
+</HeadContent>
+
+@code {
+    [Parameter]
+    public SitemapPage? SitemapPage { get; set; }
+
+    [Parameter]
+    public PageResponse? PageResponse { get; set; }
+
+    [Parameter]
+    public string? ContentItem { get; set; }
+}

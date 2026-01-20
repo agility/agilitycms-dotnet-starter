@@ -1,0 +1,30 @@
+@inject IAgilityService AgilityService
+
+@if (Content?.Fields != null)
+{
+    <div class="relative px-8">
+        <div class="max-w-screen-xl mx-auto my-12 md:mt-18 lg:mt-20">
+            <h1 class="font-display text-secondary-500 text-4xl font-black tracking-wide">
+                @Content.Fields.Title
+            </h1>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public ModuleModel ComponentData { get; set; } = new();
+
+    private ContentItemResponse<Agility.Models.Heading>? Content { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (ComponentData.Model?.Item?.ContentID > 0)
+        {
+            Content = await AgilityService.GetContentItemAsync<Agility.Models.Heading>(
+                ComponentData.Model.Item.ContentID,
+                ComponentData.Locale
+            );
+        }
+    }
+}

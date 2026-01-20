@@ -50,21 +50,21 @@ namespace Agility.NET.Starter.Util.Helpers
             return DynamicHelpers.DeserializeTo<UrlRedirectionsResponse>(result);
         }
 
-        public static SitemapPage CheckLocaleWithDifferentPageName(string path, List<SitemapPage> sitemapPages)
+        public static SitemapPage? CheckLocaleWithDifferentPageName(string? path, List<SitemapPage> sitemapPages)
         {
             if (string.IsNullOrEmpty(path)) return null;
 
             var checkPath = path;
 
-            var index = checkPath?.IndexOf("/", StringComparison.Ordinal);
+            var index = checkPath.IndexOf("/", StringComparison.Ordinal);
 
             if (index < 0) return null;
 
-            var locale = checkPath?.Substring(0, index.Value);
+            var locale = checkPath.Substring(0, index);
 
             if (string.IsNullOrEmpty(locale)) return null;
 
-            var pageWithoutLocale = checkPath?.Replace(locale, string.Empty);
+            var pageWithoutLocale = checkPath.Replace(locale, string.Empty);
             var page = sitemapPages.FirstOrDefault(p => p.Path == pageWithoutLocale);
 
             var pageInDifferentLocaleAndName =
@@ -100,7 +100,7 @@ namespace Agility.NET.Starter.Util.Helpers
 
             var key = Constants.SitemapPagesKey;
 
-            if (cache.TryGetValue(key, out List<SitemapPage> cachedSitemapPages)) return cachedSitemapPages;
+            if (cache.TryGetValue(key, out List<SitemapPage>? cachedSitemapPages) && cachedSitemapPages != null) return cachedSitemapPages;
 
             var sitemapPages = await GetSitemapPages(appSettings, fetchApiService, isPreview: false);
 
@@ -138,7 +138,7 @@ namespace Agility.NET.Starter.Util.Helpers
 
             var key = Constants.UrlRedirectionsResponseKey;
 
-            if (cache.TryGetValue(key, out UrlRedirectionsResponse cachedUrlRedirectionsResponse)) return cachedUrlRedirectionsResponse;
+            if (cache.TryGetValue(key, out UrlRedirectionsResponse? cachedUrlRedirectionsResponse) && cachedUrlRedirectionsResponse != null) return cachedUrlRedirectionsResponse;
 
             var urlRedirectionsResponse = await GetUrlRedirects(fetchApiService);
 

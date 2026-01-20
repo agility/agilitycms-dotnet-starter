@@ -1,0 +1,30 @@
+@inject IAgilityService AgilityService
+
+@if (Content?.Fields != null)
+{
+    <div class="relative px-8">
+        <div class="max-w-2xl mx-auto my-12 md:mt-18 lg:mt-20">
+            <div class="prose max-w-full mx-auto">
+                @((MarkupString)Utility.CleanHtml(Content.Fields.TextBlob ?? string.Empty))
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public ModuleModel ComponentData { get; set; } = new();
+
+    private ContentItemResponse<Agility.Models.RichTextArea>? Content { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (ComponentData.Model?.Item?.ContentID > 0)
+        {
+            Content = await AgilityService.GetContentItemAsync<Agility.Models.RichTextArea>(
+                ComponentData.Model.Item.ContentID,
+                ComponentData.Locale
+            );
+        }
+    }
+}

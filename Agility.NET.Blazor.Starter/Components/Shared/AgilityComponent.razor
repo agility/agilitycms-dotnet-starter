@@ -1,0 +1,33 @@
+@* Dynamically renders the appropriate Agility component based on the component name *@
+
+@switch (Component.Module)
+{
+    case "RichTextArea":
+        <RichTextArea ComponentData="@Component" />
+        break;
+    case "Heading":
+        <Heading ComponentData="@Component" />
+        break;
+    case "TextBlockWithImage":
+        <TextBlockWithImage ComponentData="@Component" />
+        break;
+    case "PostsListing":
+        <PostsListing ComponentData="@Component" />
+        break;
+    case "FeaturedPost":
+        <FeaturedPost ComponentData="@Component" />
+        break;
+    case "PostDetails":
+        <PostDetails ComponentData="@Component" />
+        break;
+    default:
+        <div class="p-4 bg-yellow-100 text-yellow-800 rounded">
+            Unknown component: @Component.Module
+        </div>
+        break;
+}
+
+@code {
+    [Parameter]
+    public ModuleModel Component { get; set; } = new();
+}

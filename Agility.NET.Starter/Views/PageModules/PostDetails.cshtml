@@ -1,4 +1,4 @@
-﻿@using Agility.Models
+@using Agility.Models
 @using Agility.NET.FetchAPI.Helpers
 @using Agility.NET.FetchAPI.Models.API
 @model ContentItemResponse<Post>
@@ -6,22 +6,22 @@
 <div class="relative px-8">
 	<div class="max-w-screen-xl mx-auto">
 		<div class="h-64 md:h-96 relative overflow-hidden">
-			<img src="@Model.Fields.Image.Url"
+			<img src="@Model?.Fields?.Image?.Url"
 				 class="object-cover object-center rounded-lg"
-				 alt="@Model.Fields.Image.Label" />
+				 alt="@Model?.Fields?.Image?.Label" />
 		</div>
 		<div class="max-w-2xl mx-auto mt-4">
 			<div class="uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose">
-				@Model.Fields.Category?.Fields.Title
+				@Model?.Fields?.Category?.Fields?.Title
 			</div>
 			<div class="border-b-2 border-primary-500 w-8"></div>
 			<div class="mt-4 uppercase text-gray-600 italic font-semibold text-xs">
-				@Model.Fields.Date.ToShortDateString()
+				@Model?.Fields?.Date.ToShortDateString()
 			</div>
 			<h1 class="font-display text-4xl font-bold my-6 text-secondary-500">
-				@Model.Fields.Title
+				@Model?.Fields?.Title
 			</h1>
-			<div class="prose max-w-full mb-20">@Html.Raw(@Model.Fields.Content)</div>
+			<div class="prose max-w-full mb-20">@Html.Raw(@Model?.Fields?.Content)</div>
 		</div>
 	</div>
 </div>

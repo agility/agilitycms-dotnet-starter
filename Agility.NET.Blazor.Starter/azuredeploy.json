@@ -1,0 +1,237 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "webAppName": {
+      "type": "string",
+      "defaultValue": "agilitycms-blazor",
+      "minLength": 2,
+      "metadata": {
+        "description": "Web app name (must be globally unique)."
+      }
+    },
+    "repoUrl": {
+      "type": "string",
+      "defaultValue": "https://github.com/agility/agilitycms-dotnet-starter",
+      "minLength": 2,
+      "metadata": {
+        "description": "The URL of your repo, or deploy the default repo."
+      }
+    },
+    "branch": {
+      "type": "string",
+      "defaultValue": "blazor",
+      "minLength": 2,
+      "metadata": {
+        "description": "The branch to deploy (default: blazor)."
+      }
+    },
+    "sku": {
+      "type": "string",
+      "defaultValue": "B1",
+      "allowedValues": [
+        "B1",
+        "B2",
+        "B3",
+        "S1",
+        "S2",
+        "S3",
+        "P1V2",
+        "P2V2",
+        "P3V2",
+        "P1V3",
+        "P2V3",
+        "P3V3"
+      ],
+      "metadata": {
+        "description": "App Service Plan SKU. B1 or higher recommended for WebSocket support (required for Blazor Interactive Server)."
+      }
+    },
+    "instanceGuid": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Agility CMS Instance GUID (from Settings > API Keys)"
+      }
+    },
+    "securityKey": {
+      "type": "securestring",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Agility CMS Security Key (from Settings > API Keys)"
+      }
+    },
+    "fetchAPIKey": {
+      "type": "securestring",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Agility CMS Fetch API Key (from Settings > API Keys)"
+      }
+    },
+    "previewAPIKey": {
+      "type": "securestring",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Agility CMS Preview API Key (from Settings > API Keys)"
+      }
+    },
+    "locales": {
+      "type": "string",
+      "defaultValue": "en-us",
+      "metadata": {
+        "description": "Comma-separated list of locales (e.g., 'en-us,fr-ca')"
+      }
+    },
+    "channelName": {
+      "type": "string",
+      "defaultValue": "website",
+      "metadata": {
+        "description": "Agility CMS Channel Name"
+      }
+    },
+    "cacheInMinutes": {
+      "type": "int",
+      "defaultValue": 5,
+      "metadata": {
+        "description": "In-memory cache duration in minutes"
+      }
+    },
+    "cdnMaxAgeSeconds": {
+      "type": "int",
+      "defaultValue": 30,
+      "metadata": {
+        "description": "CDN max-age in seconds (how long CDN serves cached content before revalidating)"
+      }
+    },
+    "cdnStaleWhileRevalidateSeconds": {
+      "type": "int",
+      "defaultValue": 86400,
+      "metadata": {
+        "description": "CDN stale-while-revalidate in seconds (serve stale while fetching fresh in background). Default: 1 day"
+      }
+    },
+    "cdnStaleIfErrorSeconds": {
+      "type": "int",
+      "defaultValue": 86400,
+      "metadata": {
+        "description": "CDN stale-if-error in seconds (serve stale content if origin is down). Default: 1 day"
+      }
+    }
+  },
+  "variables": {
+    "appServicePlanName": "[concat('asp-', parameters('webAppName'))]",
+    "location": "[resourceGroup().location]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2022-09-01",
+      "name": "[variables('appServicePlanName')]",
+      "location": "[variables('location')]",
+      "sku": {
+        "name": "[parameters('sku')]"
+      },
+      "kind": "linux",
+      "properties": {
+        "reserved": true
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2022-09-01",
+      "name": "[parameters('webAppName')]",
+      "location": "[variables('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"
+      ],
+      "kind": "app,linux",
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
+        "httpsOnly": true,
+        "siteConfig": {
+          "linuxFxVersion": "DOTNETCORE|10.0",
+          "webSocketsEnabled": true,
+          "alwaysOn": true,
+          "http20Enabled": true,
+          "minTlsVersion": "1.2",
+          "appSettings": [
+            {
+              "name": "AppSettings__InstanceGUID",
+              "value": "[parameters('instanceGuid')]"
+            },
+            {
+              "name": "AppSettings__SecurityKey",
+              "value": "[parameters('securityKey')]"
+            },
+            {
+              "name": "AppSettings__FetchAPIKey",
+              "value": "[parameters('fetchAPIKey')]"
+            },
+            {
+              "name": "AppSettings__PreviewAPIKey",
+              "value": "[parameters('previewAPIKey')]"
+            },
+            {
+              "name": "AppSettings__Locales",
+              "value": "[parameters('locales')]"
+            },
+            {
+              "name": "AppSettings__ChannelName",
+              "value": "[parameters('channelName')]"
+            },
+            {
+              "name": "AppSettings__CacheInMinutes",
+              "value": "[string(parameters('cacheInMinutes'))]"
+            },
+            {
+              "name": "CacheControl__MaxAgeSeconds",
+              "value": "[string(parameters('cdnMaxAgeSeconds'))]"
+            },
+            {
+              "name": "CacheControl__StaleWhileRevalidateSeconds",
+              "value": "[string(parameters('cdnStaleWhileRevalidateSeconds'))]"
+            },
+            {
+              "name": "CacheControl__StaleIfErrorSeconds",
+              "value": "[string(parameters('cdnStaleIfErrorSeconds'))]"
+            },
+            {
+              "name": "SCM_DO_BUILD_DURING_DEPLOYMENT",
+              "value": "true"
+            },
+            {
+              "name": "PROJECT",
+              "value": "Agility.NET.Blazor.Starter/Agility.NET.Blazor.Starter.csproj"
+            }
+          ]
+        }
+      },
+      "resources": [
+        {
+          "type": "sourcecontrols",
+          "apiVersion": "2022-09-01",
+          "name": "web",
+          "location": "[variables('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
+          ],
+          "properties": {
+            "repoUrl": "[parameters('repoUrl')]",
+            "branch": "[parameters('branch')]",
+            "isManualIntegration": true
+          }
+        }
+      ]
+    }
+  ],
+  "outputs": {
+    "webAppUrl": {
+      "type": "string",
+      "value": "[concat('https://', parameters('webAppName'), '.azurewebsites.net')]"
+    },
+    "webAppName": {
+      "type": "string",
+      "value": "[parameters('webAppName')]"
+    }
+  }
+}

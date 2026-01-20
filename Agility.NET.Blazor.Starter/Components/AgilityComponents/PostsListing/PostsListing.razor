@@ -1,0 +1,53 @@
+@* Server component - fetches initial posts and passes to client component *@
+@inject IAgilityService AgilityService
+
+@if (initialPosts == null)
+{
+    <div class="mt-44 px-6 flex flex-col items-center justify-center">
+        <div class="animate-pulse text-xl">Loading posts...</div>
+    </div>
+}
+else if (!initialPosts.Any())
+{
+    <div class="mt-44 px-6 flex flex-col items-center justify-center">
+        <h1 class="text-3xl text-center font-bold">No posts available.</h1>
+        <div class="my-10">
+            <a href="/home"
+               class="px-4 py-3 my-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-500 focus:outline-none focus:border-primary-700 focus:shadow-outline-primary transition duration-300">
+                Return Home
+            </a>
+        </div>
+    </div>
+}
+else
+{
+    <PostsListingClient InitialPosts="initialPosts" Locale="@locale" />
+}
+
+@code {
+    [Parameter]
+    public ModuleModel ComponentData { get; set; } = new();
+
+    private List<PostDisplayItem>? initialPosts;
+    private string locale = "en-us";
+    private const int PageSize = 10;
+
+    protected override async Task OnInitializedAsync()
+    {
+        locale = !string.IsNullOrEmpty(ComponentData?.Locale) ? ComponentData.Locale : "en-us";
+
+        try
+        {
+            // Fetch initial posts using the centralized GraphQL method (recommended)
+            initialPosts = await AgilityService.GetPostsGraphQLAsync(locale, take: PageSize, skip: 0);
+
+            // Alternative: Use the REST API method instead
+            // initialPosts = await AgilityService.GetPostsRestAsync(locale, take: PageSize, contentLinkDepth: 2);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading posts: {ex.Message}");
+            initialPosts = new List<PostDisplayItem>();
+        }
+    }
+}

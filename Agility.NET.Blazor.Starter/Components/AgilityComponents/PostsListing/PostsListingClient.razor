@@ -1,0 +1,279 @@
+@* Client component - handles infinite scroll interactivity *@
+@rendermode @(new InteractiveServerRenderMode(prerender: true))
+@inject IAgilityService AgilityService
+@inject IJSRuntime JSRuntime
+@implements IAsyncDisposable
+
+<div class="relative px-8 mb-12">
+    <div class="max-w-screen-xl mx-auto">
+        <div class="sm:grid sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            @foreach (var post in Posts)
+            {
+                <a href="@(post.IsPhantom ? "#" : $"/blog/{post.Slug}")" class="cursor-pointer">
+                    <div class="flex-col group mb-8 md:mb-0">
+                        <div class="relative h-64 overflow-hidden">
+                            <picture>
+                                <source media="(min-width: 1024px)" srcset="@GetOptimizedImageUrl(post.ImageUrl, 400)" />
+                                <source media="(min-width: 640px)" srcset="@GetOptimizedImageUrl(post.ImageUrl, 350)" />
+                                <source media="(max-width: 639px)" srcset="@GetOptimizedImageUrl(post.ImageUrl, 640)" />
+                                <img src="@GetOptimizedImageUrl(post.ImageUrl, 400)"
+                                     alt="@post.ImageLabel"
+                                     loading="lazy"
+                                     class="object-cover object-center rounded-t-lg w-full h-full" />
+                            </picture>
+                        </div>
+                        <div class="bg-gray-100 p-8 rounded-b-lg">
+                            @if (!string.IsNullOrEmpty(post.CategoryTitle))
+                            {
+                                <div class="uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose">
+                                    @post.CategoryTitle
+                                </div>
+                            }
+                            <div class="border-b-2 border-primary-500 w-8"></div>
+                            <div class="mt-4 uppercase text-gray-600 italic font-semibold text-xs">
+                                @post.DateDisplay
+                            </div>
+                            <h2 class="text-secondary-500 mt-1 font-black text-2xl group-hover:text-primary-500 transition duration-300">
+                                @post.Title
+                            </h2>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+
+        @* Infinite scroll trigger element *@
+        <div id="scroll-trigger" class="h-4"></div>
+
+        @if (IsLoading)
+        {
+            <div class="flex justify-center py-8">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500"></div>
+            </div>
+        }
+        else if (!HasMore)
+        {
+            <div class="text-center py-8 text-gray-500">
+                No more posts!
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public List<PostDisplayItem> InitialPosts { get; set; } = new();
+
+    [Parameter]
+    public string Locale { get; set; } = "en-us";
+
+    private List<PostDisplayItem> Posts { get; set; } = new();
+    private bool IsLoading { get; set; } = false;
+    private bool HasMore { get; set; } = true;
+    private int CurrentSkip { get; set; } = 0;
+    private const int PageSize = 10;
+    private DotNetObjectReference<PostsListingClient>? dotNetRef;
+    private IJSObjectReference? jsModule;
+    private bool observerInitialized = false;
+
+    protected override void OnInitialized()
+    {
+        // Start with the initial posts from the server component
+        Posts = new List<PostDisplayItem>(InitialPosts);
+        CurrentSkip = InitialPosts.Count;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        // Initialize IntersectionObserver after component is rendered
+        if (!observerInitialized && Posts.Any())
+        {
+            observerInitialized = true;
+            dotNetRef = DotNetObjectReference.Create(this);
+
+            try
+            {
+                jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>(
+                    "eval",
+                    @"(() => {
+                        const module = {
+                            observer: null,
+                            observe: function(elementId, dotNetRef) {
+                                const element = document.getElementById(elementId);
+                                if (!element) {
+                                    console.warn('Scroll trigger element not found, retrying...');
+                                    setTimeout(() => this.observe(elementId, dotNetRef), 100);
+                                    return;
+                                }
+                                this.observer = new IntersectionObserver(async (entries) => {
+                                    if (entries[0].isIntersecting) {
+                                        await dotNetRef.invokeMethodAsync('LoadMoreFromJS');
+                                    }
+                                }, { threshold: 0.1 });
+                                this.observer.observe(element);
+                            },
+                            dispose: function() {
+                                if (this.observer) {
+                                    this.observer.disconnect();
+                                }
+                            }
+                        };
+                        return module;
+                    })()");
+
+                await jsModule.InvokeVoidAsync("observe", "scroll-trigger", dotNetRef);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error setting up IntersectionObserver: {ex.Message}");
+            }
+        }
+    }
+
+    [JSInvokable]
+    public async Task LoadMoreFromJS()
+    {
+        if (!IsLoading && HasMore)
+        {
+            await LoadMorePosts();
+            StateHasChanged();
+        }
+    }
+
+    private async Task LoadMorePosts()
+    {
+        if (IsLoading || !HasMore) return;
+
+        IsLoading = true;
+        StateHasChanged();
+
+        try
+        {
+            // Fetch more posts from Agility CMS (via SignalR circuit - still server-side)
+            var newPosts = await AgilityService.GetContentByGraphQLAsync<Post>(
+                query: $@"
+                    query {{
+                        posts (take: {PageSize}, skip: {CurrentSkip}, sort: ""fields.date"", direction: ""desc"") {{
+                            contentID
+                            fields {{
+                                title
+                                slug
+                                date
+                                image {{
+                                    label
+                                    url
+                                }}
+                                category {{
+                                    fields {{
+                                        title
+                                    }}
+                                }}
+                            }}
+                        }}
+                    }}",
+                objName: "posts",
+                locale: Locale
+            );
+
+            if (newPosts.Any())
+            {
+                // Convert to display items
+                var displayItems = newPosts.Select(p => new PostDisplayItem
+                {
+                    ContentID = p.ContentID,
+                    Title = p.Fields?.Title,
+                    CategoryTitle = p.Fields?.Category?.Fields?.Title,
+                    Slug = p.Fields?.Slug,
+                    DateDisplay = p.Fields?.Date.ToString("MMM. dd, yyyy"),
+                    ImageUrl = p.Fields?.Image?.Url,
+                    ImageLabel = p.Fields?.Image?.Label,
+                    IsPhantom = false
+                }).ToList();
+
+                Posts.AddRange(displayItems);
+                CurrentSkip += newPosts.Count;
+
+                // If we got fewer than requested, switch to phantom posts
+                if (newPosts.Count < PageSize)
+                {
+                    HasMore = true; // Keep loading phantom posts for demo
+                }
+            }
+            else
+            {
+                // No more real posts, generate phantom posts for infinite scroll demo
+                var phantomPosts = GeneratePhantomPosts(PageSize);
+                Posts.AddRange(phantomPosts);
+                CurrentSkip += PageSize;
+
+                // Stop after 100 total posts (for demo purposes)
+                if (CurrentSkip > 100)
+                {
+                    HasMore = false;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading more posts: {ex.Message}");
+            HasMore = false;
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    private List<PostDisplayItem> GeneratePhantomPosts(int count)
+    {
+        var phantomPosts = new List<PostDisplayItem>();
+        for (int i = 0; i < count; i++)
+        {
+            var index = CurrentSkip + i + 1;
+            phantomPosts.Add(new PostDisplayItem
+            {
+                ContentID = 10000 + index,
+                Title = "Example infinite scrolling. Keep Scrolling!",
+                CategoryTitle = "Infinite Scroll",
+                Slug = null,
+                Url = "#",
+                DateDisplay = DateTime.Now.ToString("MMM. dd, yyyy"),
+                ImageUrl = $"https://placehold.co/600x400/6415FF/white?text=Example%0APlaceholder%0AImage%20{index}",
+                ImageLabel = $"Example Image {index}",
+                IsPhantom = true
+            });
+        }
+        return phantomPosts;
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (jsModule != null)
+        {
+            try
+            {
+                await jsModule.InvokeVoidAsync("dispose");
+                await jsModule.DisposeAsync();
+            }
+            catch
+            {
+                // Ignore disposal errors (circuit may already be disconnected)
+            }
+        }
+        dotNetRef?.Dispose();
+    }
+
+    private string GetOptimizedImageUrl(string? imageUrl, int width)
+    {
+        if (string.IsNullOrEmpty(imageUrl)) return string.Empty;
+
+        // Don't modify external placeholder URLs
+        if (!imageUrl.Contains("aglty.io") && !imageUrl.Contains("agilitycms.com"))
+        {
+            return imageUrl;
+        }
+
+        // Add format=auto and width parameters for Agility Image API
+        return $"{imageUrl}?format=auto&w={width}";
+    }
+}

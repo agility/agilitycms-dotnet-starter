@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<configuration>
-	<appSettings>
-		<add key="InstanceGUID" value="" />
-		<add key="FetchAPIKey" value="" />
-		<add key="PreviewAPIKey" value="" />
-		<add key="Path" value="{PATH TO PROJECT}\Models\AgilityModels.cs" />
-	</appSettings>
-</configuration>

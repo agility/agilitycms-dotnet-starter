@@ -7,14 +7,14 @@ namespace Agility.Models
     {
         public partial class FeaturedPostExpanded : FeaturedPost_Model
         {
-            public ContentItemResponse<Post> FeaturedPost { get; set; }
+            public ContentItemResponse<Post>? FeaturedPost { get; set; }
 
-            public new string FeaturedPost_ValueField { get; set; }
+            public new string FeaturedPost_ValueField { get; set; } = string.Empty;
 
         }
         public partial class PostsListingExpanded : PostsListing
         {
-            public new List<ContentItemResponse<Post>> Posts { get; set; }
+            public new List<ContentItemResponse<Post>> Posts { get; set; } = new();
         }
     }
 }
