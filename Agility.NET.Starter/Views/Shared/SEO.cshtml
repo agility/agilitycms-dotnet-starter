@@ -1,4 +1,4 @@
-﻿@using System.Globalization
+@using System.Globalization
 @using Agility.Models
 @using Agility.NET.FetchAPI.Helpers
 @model Agility.NET.Starter.Pages.AgilityPageModel
@@ -7,7 +7,7 @@
 	var ti = CultureInfo.CurrentCulture.TextInfo;
 }
 
-<title>@Model.SitemapPage.Title | My Travel Blog</title>
+<title>@Model.SitemapPage?.Title | My Travel Blog</title>
 
 <meta name="generator"
 		content="Agility CMS" />
@@ -16,7 +16,7 @@
 <meta name="viewport"
 		content="initial-scale=1.0, width=device-width" />
 
-@if (Model.PageResponse.IsDynamicPage)
+@if (Model.PageResponse?.IsDynamicPage == true)
 {
 	//TODO: implement og-image stuff on the dynamic page item...
 	var contentItemStr = ViewContext.RouteData.Values["contentItem"] as string;
@@ -34,8 +34,8 @@
 else
 {
 	<meta name="description"
-		content="@Model.PageResponse.SEO.MetaDescription">
+		content="@Model.PageResponse?.SEO?.MetaDescription">
 	<meta name="keywords"
-		content="@Model.PageResponse.SEO.MetaKeywords" />
-	@Html.Raw(Model.PageResponse.SEO.MetaHTML)
+		content="@Model.PageResponse?.SEO?.MetaKeywords" />
+	@Html.Raw(Model.PageResponse?.SEO?.MetaHTML)
 }

@@ -43,9 +43,9 @@ namespace Agility.NET.Starter.Util.Middleware
 				 await TransformerMiddlewareHelpers.GetOrCacheSitemapPages(
 							_env, _appSettings, _fetchApiService, _httpContextAccessor, _cache);
 
-			var path = values.Values.First();
+			var path = values.Values.FirstOrDefault();
 
-			SitemapPage agilityPage;
+			SitemapPage? agilityPage;
 
 			if (path == null)
 			{
@@ -56,7 +56,7 @@ namespace Agility.NET.Starter.Util.Middleware
 			{
 				agilityPage =
 					 sitemapPages.Find(
-						  s => TransformerMiddlewareHelpers.DoesAgilityPageExist(s, path.ToString()));
+						  s => TransformerMiddlewareHelpers.DoesAgilityPageExist(s, path.ToString() ?? string.Empty));
 			}
 
 			if (agilityPage == null) return values;

@@ -1,0 +1,65 @@
+@using Agility.Models
+
+@if (Image != null)
+{
+    <picture>
+        <CascadingValue Name="AgilityImage" Value="@Image">
+            @ChildContent
+        </CascadingValue>
+        <img src="@GetFallbackUrl()"
+             alt="@(Alt ?? Image.Label)"
+             loading="@(Priority ? "eager" : "lazy")"
+             class="@Class" />
+    </picture>
+}
+
+@code {
+    /// <summary>
+    /// The image from Agility CMS.
+    /// </summary>
+    [Parameter]
+    public ImageAttachment? Image { get; set; }
+
+    /// <summary>
+    /// Optional: the fallback width of the image to output in the img tag.
+    /// This will render if no sources are selected, or if the browser does not support the picture tag.
+    /// </summary>
+    [Parameter]
+    public int? FallbackWidth { get; set; }
+
+    /// <summary>
+    /// Optional: the alt text for the image if you don't want to use the one defined on the image from Agility.
+    /// </summary>
+    [Parameter]
+    public string? Alt { get; set; }
+
+    /// <summary>
+    /// Child content containing AgilitySource components for responsive image sources.
+    /// </summary>
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// Optional: if true, the fallback img loads eagerly instead of lazy.
+    /// </summary>
+    [Parameter]
+    public bool Priority { get; set; } = false;
+
+    /// <summary>
+    /// The CSS class name to apply to the img element.
+    /// </summary>
+    [Parameter]
+    public string? Class { get; set; }
+
+    private string GetFallbackUrl()
+    {
+        if (Image == null) return string.Empty;
+
+        if (FallbackWidth.HasValue && FallbackWidth.Value > 0)
+        {
+            return $"{Image.Url}?format=auto&w={FallbackWidth.Value}";
+        }
+
+        return Image.Url;
+    }
+}

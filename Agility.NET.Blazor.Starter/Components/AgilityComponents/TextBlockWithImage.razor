@@ -1,0 +1,79 @@
+@using Agility.Net.Blazor.Starter.Components.Shared
+@inject IAgilityService AgilityService
+
+@if (Content?.Fields != null)
+{
+    var isHighPriority = Content.Fields.HighPriority == "true";
+
+    <div class="relative px-8">
+        <div class="flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center">
+            <div class="md:w-6/12 flex-shrink-0 relative">
+                @if (Content.Fields.PrimaryButton != null)
+                {
+                    <a href="@Content.Fields.PrimaryButton.Href" aria-label="Go to @Content.Fields.Tagline">
+                        <AgilityPic Image="@Content.Fields.Image"
+                                    Class="rounded-lg object-cover object-center cursor-pointer w-full"
+                                    FallbackWidth="768"
+                                    Priority="@isHighPriority">
+                            <AgilitySource Media="(min-width: 768px)" Width="768" />
+                            <AgilitySource Media="(max-width: 767px)" Width="640" />
+                        </AgilityPic>
+                    </a>
+                }
+                else
+                {
+                    <AgilityPic Image="@Content.Fields.Image"
+                                Class="rounded-lg object-cover object-center w-full"
+                                FallbackWidth="768"
+                                Priority="@isHighPriority">
+                        <AgilitySource Media="(min-width: 768px)" Width="768" />
+                        <AgilitySource Media="(max-width: 767px)" Width="640" />
+                    </AgilityPic>
+                }
+            </div>
+            <div class="md:w-6/12 mt-16 md:mt-0 @(Content.Fields.ImagePosition != "right" ? "md:ml-12 lg:ml-16 md:order-last" : "md:mr-12 lg:mr-16 md:order-first")">
+                <div class="g:py-8 text-center md:text-left">
+                    @if (!string.IsNullOrEmpty(Content.Fields.Tagline))
+                    {
+                        <span class="font-bold text-primary-500 text-sm text-center md:text-left uppercase">
+                            @Content.Fields.Tagline
+                        </span>
+                    }
+
+                    <h2 class="font-display text-4xl font-black text-secondary-500 md:text-3xl lg:text-5xl tracking-wide text-center mt-4 lg:leading-tight md:text-left">
+                        @Content.Fields.Title
+                    </h2>
+                    <p class="mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-200">
+                        @((MarkupString)Content.Fields.Content)
+                    </p>
+                    @if (Content.Fields.PrimaryButton != null)
+                    {
+                        <a class="inline-block mt-8 md:mt-8 px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-500 hover:bg-primary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+                           href="@Content.Fields.PrimaryButton.Href"
+                           aria-label="Go to @Content.Fields.Tagline">
+                            @Content.Fields.PrimaryButton.Text
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public ModuleModel ComponentData { get; set; } = new();
+
+    private ContentItemResponse<Agility.Models.TextBlockWithImage>? Content { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (ComponentData.Model?.Item?.ContentID > 0)
+        {
+            Content = await AgilityService.GetContentItemAsync<Agility.Models.TextBlockWithImage>(
+                ComponentData.Model.Item.ContentID,
+                ComponentData.Locale
+            );
+        }
+    }
+}

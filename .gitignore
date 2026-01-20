@@ -1,15 +1,38 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# builds
-Agility.NET.Starter/bin
-Agility.NET.Starter/obj
-Agility.NET.Starter/node_modules
-Agility.NET.AgilityCLI/bin
-Agility.NET.AgilityCLI/obj
-Agility.NET.Starter/.vs
+# .NET build outputs
+**/bin/
+**/obj/
 
-.vs
+# Node.js
+**/node_modules/
 
-Agility.NET.Starter/appsettings.json
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# JetBrains Rider
+.idea/
+
+# macOS
+.DS_Store
+
+# Secrets and configuration (do not commit API keys)
+# Use appsettings.local.json for your local secrets
+**/appsettings.local.json
 Agility.NET.AgilityCLI/App.config
 
+# Data protection keys (generated locally for antiforgery)
+**/keys/
+
+# Keep example files
+!*.example
+
+# Claude Code
+.claude/

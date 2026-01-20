@@ -1,0 +1,82 @@
+@using Agility.Net.Blazor.Starter.Components.Shared
+@inject IAgilityService AgilityService
+
+@if (FeaturedPostContent?.Fields != null)
+{
+    <div class="relative px-8 mb-8">
+        <div class="flex flex-col sm:flex-row max-w-7xl mx-auto pt-8 group">
+            <div class="sm:w-1/2 lg:w-2/3 sm:rounded-t-none sm:rounded-l-lg relative">
+                <a href="/blog/@FeaturedPostContent.Fields.Slug" class="cursor-pointer">
+                    <div class="h-64 sm:h-96 relative overflow-hidden">
+                        <AgilityPic Image="@FeaturedPostContent.Fields.Image"
+                                    Class="object-center rounded-t-lg sm:rounded-l-lg sm:rounded-t-none object-cover w-full h-full"
+                                    FallbackWidth="800">
+                            <AgilitySource Media="(min-width: 1024px)" Width="900" />
+                            <AgilitySource Media="(min-width: 640px)" Width="700" />
+                            <AgilitySource Media="(max-width: 639px)" Width="640" />
+                        </AgilityPic>
+                    </div>
+                </a>
+            </div>
+            <div class="sm:w-1/2 lg:w-1/3 bg-gray-100 p-8  rounded-b-lg sm:rounded-bl-none sm:rounded-r-lg  relative">
+                <a href="/blog/@FeaturedPostContent.Fields.Slug" class="cursor-pointer">
+                    @if (FeaturedPostContent.Fields.Category?.Fields != null)
+                    {
+                        <div class="font-display uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose after:content">
+                            @FeaturedPostContent.Fields.Category.Fields.Title
+                        </div>
+                    }
+                    <div class="border-b-2 border-primary-500 w-8"></div>
+                    <div class="mt-4 uppercase text-gray-600 italic font-semibold text-xs">
+                        @FeaturedPostContent.Fields.Date.ToShortDateString()
+                    </div>
+                    <h2 class="font-display text-secondary-500 mt-1 font-black text-2xl group-hover:text-primary-500 transition duration-300">
+                        @FeaturedPostContent.Fields.Title
+                    </h2>
+                    @if (!string.IsNullOrEmpty(FeaturedPostContent.Fields.Content) && FeaturedPostContent.Fields.Content.Length > 250)
+                    {
+                        <p class="text-sm mt-3 leading-loose text-gray-600 font-medium">
+                            @((MarkupString)(FeaturedPostContent.Fields.Content.Substring(0, 250) + "..."))
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="text-sm mt-3 leading-loose text-gray-600 font-medium">
+                            @((MarkupString)(FeaturedPostContent.Fields.Content ?? string.Empty))
+                        </p>
+                    }
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public ModuleModel ComponentData { get; set; } = new();
+
+    private ContentItemResponse<Post>? FeaturedPostContent { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (ComponentData.Model?.Item?.ContentID > 0)
+        {
+            // First get the component to find the featured post ID
+            var componentContent = await AgilityService.GetContentItemAsync<Agility.Models.FeaturedPost_Model>(
+                ComponentData.Model.Item.ContentID,
+                ComponentData.Locale
+            );
+
+            if (componentContent?.Fields?.FeaturedPost_ValueField != null &&
+                int.TryParse(componentContent.Fields.FeaturedPost_ValueField, out var featuredPostId))
+            {
+                // Then get the actual featured post
+                FeaturedPostContent = await AgilityService.GetContentItemAsync<Post>(
+                    featuredPostId,
+                    ComponentData.Locale,
+                    contentLinkDepth: 2
+                );
+            }
+        }
+    }
+}

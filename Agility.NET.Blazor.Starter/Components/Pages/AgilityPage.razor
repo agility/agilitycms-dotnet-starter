@@ -1,0 +1,109 @@
+@page "/"
+@page "/{*slug}"
+@inject IAgilityService AgilityService
+
+<SEO SitemapPage="@SitemapPage" PageResponse="@PageResponse" ContentItem="@ContentItem" />
+
+@if (PageResponse != null && SitemapPage != null)
+{
+    <SiteHeader Locale="@SitemapPage.Locale" />
+
+    <main class="flex-grow">
+        @foreach (var zone in PageResponse.Zones)
+        {
+            @if (zone.ReferenceName == "MainContentZone")
+            {
+                @foreach (var component in zone.Modules)
+                {
+                    var componentModel = new ModuleModel
+                    {
+                        Locale = SitemapPage.Locale,
+                        Module = component.Module,
+                        Model = component,
+                        SitemapPage = SitemapPage
+                    };
+                    <AgilityComponent Component="@componentModel" />
+                }
+            }
+        }
+    </main>
+
+    <SiteFooter />
+
+    @if (!string.IsNullOrEmpty(PageResponse.Scripts?.Top))
+    {
+        @((MarkupString)$"<script>{PageResponse.Scripts.Top}</script>")
+    }
+
+    @if (!string.IsNullOrEmpty(PageResponse.Scripts?.Bottom))
+    {
+        @((MarkupString)$"<script>{PageResponse.Scripts.Bottom}</script>")
+    }
+}
+else if (!IsLoading)
+{
+    <div class="flex flex-col items-center justify-center min-h-screen">
+        <h1 class="text-4xl font-bold text-secondary-500">Page Not Found</h1>
+        <p class="text-xl text-gray-600 mt-4">The requested page could not be found.</p>
+        <a href="/" class="mt-8 px-6 py-3 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition duration-300">
+            Go Home
+        </a>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string? Slug { get; set; }
+
+    private PageResponse? PageResponse { get; set; }
+    private SitemapPage? SitemapPage { get; set; }
+    private string? ContentItem { get; set; }
+    private bool IsLoading { get; set; } = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadPageAsync();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await LoadPageAsync();
+    }
+
+    private async Task LoadPageAsync()
+    {
+        IsLoading = true;
+
+        var path = Slug ?? string.Empty;
+        SitemapPage = await AgilityService.GetPageByPathAsync(path);
+
+        if (SitemapPage == null)
+        {
+            IsLoading = false;
+            return;
+        }
+
+        PageResponse = await AgilityService.GetPageAsync(SitemapPage.PageID, SitemapPage.Locale);
+
+        if (PageResponse == null)
+        {
+            IsLoading = false;
+            return;
+        }
+
+        PageResponse.IsDynamicPage = PageResponse.Dynamic != null;
+
+        if (PageResponse.IsDynamicPage)
+        {
+            PageResponse.Name = SitemapPage.Name;
+            var contentItemResponse = await AgilityService.GetContentItemAsync<object>(
+                SitemapPage.ContentID,
+                SitemapPage.Locale,
+                contentLinkDepth: 3
+            );
+            ContentItem = System.Text.Json.JsonSerializer.Serialize(contentItemResponse, Constants.JsonSerializerOptions);
+        }
+
+        IsLoading = false;
+    }
+}

@@ -5,8 +5,8 @@
 @model NET.Starter.Pages.AgilityPageModel
 
 @{
-	Layout = PageHelpers.GetPageTemplatePath(Model.PageResponse.TemplateName);
-	var scripts = Model.PageResponse.Scripts;
+	Layout = PageHelpers.GetPageTemplatePath(Model.PageResponse?.TemplateName ?? string.Empty);
+	var scripts = Model.PageResponse?.Scripts;
 }
 
 @{
@@ -17,7 +17,7 @@
 	});
 }
 
-@if (!string.IsNullOrEmpty(scripts.Top))
+@if (!string.IsNullOrEmpty(scripts?.Top))
 {
 	@Html.Raw($"<script>{scripts.Top}</script>")
 }
@@ -44,12 +44,12 @@
 							SitemapPage = Model.SitemapPage
 						};
 
-			Write(await Component.InvokeAsync(model.Module, moduleModel));
+			Write(await Component.InvokeAsync(model?.Module ?? string.Empty, moduleModel));
 		}
 	});
 }
 
-@if (!string.IsNullOrEmpty(scripts.Bottom))
+@if (!string.IsNullOrEmpty(scripts?.Bottom))
 {
 	@Html.Raw($"<script>{scripts.Bottom}</script>")
 }

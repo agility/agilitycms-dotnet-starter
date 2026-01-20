@@ -11,13 +11,13 @@ namespace Agility.NET.Starter.Util.Helpers
 
 			var httpContext = httpContextAccessor.HttpContext;
 
-			return httpContext.Items["IsPreview"] != null && (bool)httpContext.Items["IsPreview"];
+			return httpContext.Items["IsPreview"] is bool isPreview && isPreview;
 		}
 
 		public static bool IsPreviewMode(HttpContext httpContext)
 		{
 
-			return httpContext.Items["IsPreview"] != null && (bool)httpContext.Items["IsPreview"];
+			return httpContext.Items["IsPreview"] is bool isPreview && isPreview;
 		}
 
 		public static void SetPreviewMode(IHttpContextAccessor httpContextAccessor, bool isPreview)

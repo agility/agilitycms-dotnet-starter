@@ -1,49 +1,65 @@
 # Agility CMS & .NET Starter
 
-To start using the Agility CMS & .NET Starter, [sign up](https://agilitycms.com/free) for a FREE account and create a new Instance using the DotNet Starter.
+This monorepo contains two .NET starter projects for Agility CMS:
+
+| Project | Description | Framework |
+|---------|-------------|-----------|
+| [Agility.NET.Starter](./Agility.NET.Starter/) | Razor Pages implementation | ASP.NET Core Razor Pages |
+| [Agility.Net.Blazor.Starter](./Agility.Net.Blazor.Starter/) | Blazor SSR implementation | Blazor Server-Side Rendering |
+
+To start using these starters, [sign up](https://agilitycms.com/free) for a FREE account and create a new Instance using the DotNet Starter.
 
 [Introduction to .NET and Agility CMS](https://agilitycms.com/docs/dotNet)
 
-## About This Starter
+## About These Starters
 
-- Uses the latest version of .NET, with greatly improved performance across many components, Language improvements to C# and F#, and much more.
+Both starters share the same features:
+
+- Uses the latest version of .NET 8, with greatly improved performance across many components
 - Supports full [Layout Management](https://agilitycms.com/docs/overview/layout-management)
 - Supports Preview Mode
+- Uses Tailwind CSS v4 for styling
+- Integrates with Agility CMS via the [Agility.NET.FetchAPI](https://www.nuget.org/packages/Agility.NET.FetchAPI) package
 
-### Tailwind CSS
+### Choose Your Framework
 
-This starter uses [Tailwind CSS](https://tailwindcss.com/), a simple and lightweight utility-first CSS framework packed with classes that can be composed to build any design, directly in your markup.
+- **Razor Pages** (`Agility.NET.Starter`): Traditional server-rendered pages with the familiar Razor syntax. Great for SEO and simpler applications.
 
-It also comes equipped with [Autoprefixer](https://www.npmjs.com/package/autoprefixer), a plugin which use the data based on current browser popularity and property support to apply CSS prefixes for you.
+- **Blazor SSR** (`Agility.Net.Blazor.Starter`): Server-side rendered Blazor components. Enables component-based architecture while maintaining server-side rendering benefits.
 
-This project is using Node.js to generate the tailwind css classes.
+## Prerequisites
+
+Before you dive into the code, ensure you have:
+
+- [.NET SDK](https://dotnet.microsoft.com/download) (>= v8.0)
+- [Node.js](https://nodejs.org/) (for Tailwind CSS compilation)
 
 ## Getting Started
 
-🚨 Before you dive into the code, it's important that you have the latest version of the [.NET SDK](https://dotnet.microsoft.com/download) installed on your machine (>=v8.0), as the project will _not_ run without this.
+See the README in each project folder for specific setup instructions:
 
-### Setting up the Starter
+- [Razor Pages Starter README](./Agility.NET.Starter/README.md)
+- [Blazor SSR Starter README](./Agility.Net.Blazor.Starter/README.md)
 
-1. cd into the `Agility.NET.Starter` directory.
-2. Rename the `appsetting.json.example` file to `appsettings.json`.
-3. Overwrite the values in the `appsettings.json` file with the credentials from the API Keys page in [Agility Settings](https://app.agilitycms.com/settings/apikeys).
+## Agility CMS Terminology
 
-## Running the Site Locally
+This starter uses Agility CMS's current terminology:
 
-- `dotnet build` => Builds the website
-- `dotnet run` => Builds & runs the website
-- `npm run dev & dotnet watch` => Builds and runs the site in Watch mode, so changes are reflected in the browser immediately.
-- `dotnet clean` => Cleans the build outputs of the site
+| Term | Description |
+|------|-------------|
+| **Components** | Reusable content modules that can be added to page zones (formerly called "Page Modules") |
+| **Page Models** | Templates that define the structure and zones of a page (formerly called "Page Templates") |
+| **Content Models** | Schemas that define the structure of content items |
 
 ## How It Works
 
 - [How Pages/Layouts Work](https://agilitycms.com/docs/dotNet/how-pages-work-in-net)
 - [How Components Work](https://agilitycms.com/docs/dotNet/how-page-modules-work-in-net)
-- [How Layout Models/Templates Work](https://agilitycms.com/docs/dotNet/how-layout-models-work-in-net)
+- [How Page Models Work](https://agilitycms.com/docs/dotNet/how-layout-models-work-in-net)
 
 ## Deploy to Azure App Service
 
-1. Create an Web App (server) to host your application by clicking `Azure Deploy` button below: <br/>
+1. Create a Web App (server) to host your application by clicking the `Azure Deploy` button below: <br/>
    [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fagility%2Fagilitycms-dotnet-starter%2Fmain%2FAgility.NET.Starter%2Fazuredeploy.json)
 
 2. Deploy your source to Web App by following the steps here [How to Deploy the Dotnet Starter to Azure](https://agilitycms.com/docs/dotNet/deploy-net-site-to-azure)
@@ -75,4 +91,4 @@ This project is using Node.js to generate the tailwind css classes.
 
 ## Feedback and Questions
 
-If you have feedback or questions about this starter, please use the [Github Issues](https://github.com/agility/agilitycms-dotnet-starter/issues) on this repo, join our [Community Slack Channel](https://agilitycms.com/join-slack).
+If you have feedback or questions about this starter, please use the [Github Issues](https://github.com/agility/agilitycms-dotnet-starter/issues) on this repo, or join our [Community Slack Channel](https://agilitycms.com/join-slack).

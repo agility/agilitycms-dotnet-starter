@@ -16,10 +16,10 @@ namespace Agility.NET.Starter.Pages
 	{
 		private readonly FetchApiService _fetchApiService;
 
-		public PageResponse PageResponse { get; set; }
-		public List<ContentZone> ContentZones { get; set; }
-		public string Locale { get; set; }
-		public SitemapPage SitemapPage { get; set; }
+		public PageResponse? PageResponse { get; set; }
+		public List<ContentZone> ContentZones { get; set; } = new();
+		public string Locale { get; set; } = string.Empty;
+		public SitemapPage? SitemapPage { get; set; }
 
 		public AgilityPageModel(ILogger<AgilityPageModel> logger, IOptions<AppSettings> appSettings, FetchApiService fetchApiService)
 		{
@@ -28,7 +28,7 @@ namespace Agility.NET.Starter.Pages
 
 		public async Task<IActionResult> OnGetAsync()
 		{
-			var sitemapPage = (SitemapPage)RouteData.Values["agilityPage"];
+			var sitemapPage = RouteData.Values["agilityPage"] as SitemapPage;
 			var isPreview = Util.Helpers.PreviewHelpers.IsPreviewMode(HttpContext);
 
 			if (sitemapPage == null) return Page();

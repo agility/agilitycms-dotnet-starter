@@ -27,12 +27,12 @@
 				<a href="/"
 				   class="flex items-center">
 					<img class="h-14 sm:h-20 w-auto z-50"
-						 src="@Model.SiteHeader.Logo.Url"
-						 alt="@Model.SiteHeader.Logo.Label"
+						 src="@Model.SiteHeader?.Logo?.Url"
+						 alt="@Model.SiteHeader?.Logo?.Label"
 						 width="104"
 						 height="80" />
 					<p class="font-bold text-xl text-secondary-500 ml-3 mt-2">
-						@Model.SiteHeader.SiteName
+						@Model.SiteHeader?.SiteName
 					</p>
 				</a>
 			</div>

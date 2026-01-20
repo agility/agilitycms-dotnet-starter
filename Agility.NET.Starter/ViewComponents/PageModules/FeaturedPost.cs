@@ -31,7 +31,7 @@ namespace Agility.NET.Starter.ViewComponents.PageModules
 			});
 
 			//get the content id of the featured post
-			var featuredPostContentId = int.Parse(component.Fields.FeaturedPost_ValueField);
+			var featuredPostContentId = int.Parse(component?.Fields?.FeaturedPost_ValueField ?? "0");
 
 			var featuredPost = await _fetchApiService.GetTypedContentItem<Post>(new GetItemParameters
 			{

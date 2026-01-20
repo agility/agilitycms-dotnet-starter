@@ -1,0 +1,59 @@
+@using Agility.Models
+
+@if (ParentImage != null)
+{
+    <source media="@Media" srcset="@GetSourceUrl()" />
+}
+
+@code {
+    /// <summary>
+    /// The CSS media query for this source (e.g., "(min-width: 1280px)").
+    /// </summary>
+    [Parameter]
+    public string Media { get; set; } = string.Empty;
+
+    /// <summary>
+    /// The width to resize the image to for this source.
+    /// </summary>
+    [Parameter]
+    public int Width { get; set; }
+
+    /// <summary>
+    /// The height to resize the image to for this source (optional).
+    /// </summary>
+    [Parameter]
+    public int Height { get; set; }
+
+    /// <summary>
+    /// The parent image passed down via CascadingParameter.
+    /// </summary>
+    [CascadingParameter(Name = "AgilityImage")]
+    public ImageAttachment? ParentImage { get; set; }
+
+    private string GetSourceUrl()
+    {
+        if (ParentImage == null) return string.Empty;
+
+        var w = Width > 0 ? $"&w={Width}" : string.Empty;
+        var h = Height > 0 ? $"&h={Height}" : string.Empty;
+
+        if (!string.IsNullOrEmpty(w) || !string.IsNullOrEmpty(h))
+        {
+            // If we have a width and NOT a height, do NOT allow the image to be sized larger than the original width
+            if (!string.IsNullOrEmpty(w) && string.IsNullOrEmpty(h) && ParentImage.Width.HasValue)
+            {
+                w = $"&w={Math.Min(Width, ParentImage.Width.Value)}";
+            }
+
+            // If we have a height and NOT a width, do NOT allow the image to be sized larger than the original height
+            if (!string.IsNullOrEmpty(h) && string.IsNullOrEmpty(w) && ParentImage.Height.HasValue)
+            {
+                h = $"&h={Math.Min(Height, ParentImage.Height.Value)}";
+            }
+
+            return $"{ParentImage.Url}?format=auto{w}{h}";
+        }
+
+        return ParentImage.Url;
+    }
+}

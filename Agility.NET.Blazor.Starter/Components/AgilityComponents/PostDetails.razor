@@ -1,0 +1,55 @@
+@using Agility.Net.Blazor.Starter.Components.Shared
+@inject IAgilityService AgilityService
+
+@if (PostContent?.Fields != null)
+{
+    <div class="relative px-8">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="h-64 md:h-96 lg:h-[480px] relative overflow-hidden rounded-lg">
+                <AgilityPic Image="@PostContent.Fields.Image"
+                            Class="object-cover object-center w-full h-full"
+                            FallbackWidth="800"
+                            Priority="true">
+                    <AgilitySource Media="(min-width: 1280px)" Width="1200" />
+                    <AgilitySource Media="(min-width: 640px)" Width="800" />
+                    <AgilitySource Media="(max-width: 639px)" Width="640" />
+                </AgilityPic>
+            </div>
+            <div class="max-w-2xl mx-auto mt-4">
+                <div class="uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose">
+                    @PostContent.Fields.Category?.Fields?.Title
+                </div>
+                <div class="border-b-2 border-primary-500 w-8"></div>
+                <div class="mt-4 uppercase text-gray-600 italic font-semibold text-xs">
+                    @PostContent.Fields.Date.ToShortDateString()
+                </div>
+                <h1 class="font-display text-4xl font-bold my-6 text-secondary-500">
+                    @PostContent.Fields.Title
+                </h1>
+                <div class="prose max-w-full mb-20">
+                    @((MarkupString)PostContent.Fields.Content)
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public ModuleModel ComponentData { get; set; } = new();
+
+    private ContentItemResponse<Post>? PostContent { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // For dynamic pages, the content ID comes from the sitemap page
+        if (ComponentData.SitemapPage?.ContentID > 0)
+        {
+            PostContent = await AgilityService.GetContentItemAsync<Post>(
+                ComponentData.SitemapPage.ContentID,
+                ComponentData.Locale,
+                contentLinkDepth: 3
+            );
+        }
+    }
+}

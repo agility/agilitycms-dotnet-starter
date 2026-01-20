@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Agility.Net.Blazor.Starter</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.Development.json.example" />
+    <Content Include="appsettings.json.example" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\agility-preview-logo.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Agility.NET.FetchAPI" Version="3.0.0" />
+  </ItemGroup>
+
+  <Target Name="Tailwind" BeforeTargets="Compile">
+    <Exec Command="npx tailwindcss -i ./Styles/tailwind.css -o ./wwwroot/css/output.css" />
+  </Target>
+
+  <Target Name="TailwindDebug" BeforeTargets="Compile" Condition="'$(Configuration)' == 'Debug'">
+    <Exec Command="npx tailwindcss -i ./Styles/tailwind.css -o ./wwwroot/css/output.css" />
+  </Target>
+
+  <Target Name="TailwindRelease" BeforeTargets="Compile" Condition="'$(Configuration)' == 'Release'">
+    <Exec EnvironmentVariables="NODE_ENV=production" Command="npx tailwindcss -i ./Styles/tailwind.css -o ./wwwroot/css/output.css --minify" />
+  </Target>
+
+</Project>

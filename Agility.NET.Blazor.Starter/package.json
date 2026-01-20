@@ -1,0 +1,14 @@
+{
+  "name": "agility-blazor-starter",
+  "version": "1.0.0",
+  "description": "Agility CMS Blazor SSR Starter",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./Styles/tailwind.css -o ./wwwroot/css/output.css --watch",
+    "build": "npx tailwindcss -i ./Styles/tailwind.css -o ./wwwroot/css/output.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.0.0",
+    "@tailwindcss/cli": "^4.0.0",
+    "@tailwindcss/typography": "^0.5.16"
+  }
+}

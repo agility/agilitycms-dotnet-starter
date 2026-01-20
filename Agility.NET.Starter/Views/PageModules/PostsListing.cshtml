@@ -1,4 +1,4 @@
-﻿@using Agility.NET.FetchAPI.Models.API
+@using Agility.NET.FetchAPI.Models.API
 @using Agility.Models
 @model System.Collections.Generic.List<ContentItemResponse<Post>>
 
@@ -27,28 +27,28 @@
 		<div class="sm:grid sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
 			@foreach (var post in @Model)
 			{
-				<a onclick="redirect('@post.Fields.Slug')"
+				<a onclick="redirect('@post?.Fields?.Slug')"
 					class="cursor-pointer">
 					<div class="flex-col group mb-8 md:mb-0">
 						<div class="relative h-64 overflow-hidden">
-							<img src="@post.Fields.Image.Url"
-								  alt="@post.Fields.Image.Label"
+							<img src="@post?.Fields?.Image?.Url"
+								  alt="@post?.Fields?.Image?.Label"
 								  class="object-cover object-center rounded-t-lg"
 								  layout="fill" />
 						</div>
 						<div class="bg-gray-100 p-8 border-2 border-t-0 rounded-b-lg">
-							@if (post.Fields.Category != null)
+							@if (post?.Fields?.Category != null)
 							{
 								<div class="uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose">
-									@post.Fields.Category?.Fields.Title
+									@post?.Fields?.Category?.Fields?.Title
 								</div>
 							}
 							<div class="border-b-2 border-primary-500 w-8"></div>
 							<div class="mt-4 uppercase text-gray-600 italic font-semibold text-xs">
-								@post.Fields.Date.ToShortDateString()
+								@post?.Fields?.Date.ToShortDateString()
 							</div>
 							<h2 class="text-secondary-500 mt-1 font-black text-2xl group-hover:text-primary-500 transition duration-300">
-								@post.Fields.Title
+								@post?.Fields?.Title
 							</h2>
 						</div>
 					</div>
