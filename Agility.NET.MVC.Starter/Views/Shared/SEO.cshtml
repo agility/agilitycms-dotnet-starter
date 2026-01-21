@@ -1,0 +1,41 @@
+@using System.Globalization
+@using Agility.Models
+@using Agility.NET.FetchAPI.Helpers
+@model Agility.NET.MVC.Starter.Pages.AgilityPageModel
+
+@{
+	var ti = CultureInfo.CurrentCulture.TextInfo;
+}
+
+<title>@Model.SitemapPage?.Title | My Travel Blog</title>
+
+<meta name="generator"
+		content="Agility CMS" />
+<meta name="agility_timestamp"
+		content="@DateTime.Now" />
+<meta name="viewport"
+		content="initial-scale=1.0, width=device-width" />
+
+@if (Model.PageResponse?.IsDynamicPage == true)
+{
+	//TODO: implement og-image stuff on the dynamic page item...
+	var contentItemStr = ViewContext.RouteData.Values["contentItem"] as string;
+	if (!string.IsNullOrEmpty(contentItemStr))
+	{
+		var post = DynamicHelpers.DeserializeContentItemTo<Post>(contentItemStr);
+
+		<meta name="description"
+		content="@post.SEO?.MetaDescription">
+		<meta name="keywords"
+		content="@post.SEO?.MetaKeywords" />
+		@Html.Raw(post.SEO?.MetaHTML)
+	}
+}
+else
+{
+	<meta name="description"
+		content="@Model.PageResponse?.SEO?.MetaDescription">
+	<meta name="keywords"
+		content="@Model.PageResponse?.SEO?.MetaKeywords" />
+	@Html.Raw(Model.PageResponse?.SEO?.MetaHTML)
+}

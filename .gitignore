@@ -3,6 +3,7 @@
 # .NET build outputs
 **/bin/
 **/obj/
+**/packages/
 
 # Node.js
 **/node_modules/

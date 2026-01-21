@@ -1,0 +1,11 @@
+﻿@using Agility.NET.MVC.Starter.Util
+@using Agility.Models
+@using Agility.NET.FetchAPI.Helpers
+@using Agility.NET.FetchAPI.Models.API
+@model ContentItemResponse<Agility.Models.RichTextArea>
+
+<div class="relative px-8">
+    <div class="max-w-2xl mx-auto my-12 md:mt-18 lg:mt-20">
+        <div class="prose max-w-full mx-auto">@Html.Raw(Utility.CleanHtml(Model?.Fields?.TextBlob ?? string.Empty))</div>
+    </div>
+</div>
