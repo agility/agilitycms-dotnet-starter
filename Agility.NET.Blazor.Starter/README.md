@@ -4,7 +4,7 @@ This is a Blazor Server-Side Rendering (SSR) starter for Agility CMS, built with
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fagility%2Fagilitycms-dotnet-starter%2Fmain%2FAgility.NET.Blazor.Starter%2Fazuredeploy.json)
 
-## Features
+## Features:
 
 - **Blazor SSR**: Server-side rendered Blazor components for optimal performance and SEO
 - **Interactive Server Components**: Opt-in interactivity using SignalR for dynamic features like infinite scroll
@@ -22,10 +22,10 @@ This starter uses **Blazor Static SSR** as the default rendering mode, with the 
 
 ### Render Modes
 
-| Mode | Description | Use Case |
-|------|-------------|----------|
-| **Static SSR** (default) | Server renders HTML, no client interactivity | Most pages/components |
-| **Interactive Server** | SignalR connection for real-time updates | Infinite scroll, forms, dynamic UI |
+| Mode                     | Description                                  | Use Case                           |
+| ------------------------ | -------------------------------------------- | ---------------------------------- |
+| **Static SSR** (default) | Server renders HTML, no client interactivity | Most pages/components              |
+| **Interactive Server**   | SignalR connection for real-time updates     | Infinite scroll, forms, dynamic UI |
 
 ### Server/Client Component Pattern
 
@@ -35,6 +35,7 @@ For components requiring interactivity (like the Posts Listing with infinite scr
 2. **Client Component** - Handles interactive features via SignalR
 
 Example: `PostsListing/`
+
 - `PostsListing.razor` - Server component, fetches initial posts
 - `PostsListingClient.razor` - Interactive component with infinite scroll
 
@@ -99,12 +100,12 @@ Create `appsettings.local.json` with your Agility CMS credentials from [Agility 
 
 ```json
 {
-  "AppSettings": {
-    "InstanceGUID": "your-instance-guid",
-    "SecurityKey": "your-security-key",
-    "FetchAPIKey": "your-fetch-api-key",
-    "PreviewAPIKey": "your-preview-api-key"
-  }
+	"AppSettings": {
+		"InstanceGUID": "your-instance-guid",
+		"SecurityKey": "your-security-key",
+		"FetchAPIKey": "your-fetch-api-key",
+		"PreviewAPIKey": "your-preview-api-key"
+	}
 }
 ```
 
@@ -139,27 +140,28 @@ All settings can be configured via `appsettings.json` or environment variables. 
 
 ### AppSettings
 
-| Setting | Default | Env Variable | Description |
-|---------|---------|--------------|-------------|
-| `InstanceGUID` | - | `AppSettings__InstanceGUID` | Your Agility CMS instance GUID |
-| `SecurityKey` | - | `AppSettings__SecurityKey` | Security key for preview mode validation |
-| `FetchAPIKey` | - | `AppSettings__FetchAPIKey` | API key for fetching published content |
-| `PreviewAPIKey` | - | `AppSettings__PreviewAPIKey` | API key for fetching preview/draft content |
-| `Locales` | `en-us` | `AppSettings__Locales` | Comma-separated locale codes (e.g., `en-us,fr-ca`) |
-| `ChannelName` | `website` | `AppSettings__ChannelName` | Agility CMS channel/sitemap name |
-| `CacheInMinutes` | `5` | `AppSettings__CacheInMinutes` | In-memory cache duration for API responses |
+| Setting          | Default   | Env Variable                  | Description                                        |
+| ---------------- | --------- | ----------------------------- | -------------------------------------------------- |
+| `InstanceGUID`   | -         | `AppSettings__InstanceGUID`   | Your Agility CMS instance GUID                     |
+| `SecurityKey`    | -         | `AppSettings__SecurityKey`    | Security key for preview mode validation           |
+| `FetchAPIKey`    | -         | `AppSettings__FetchAPIKey`    | API key for fetching published content             |
+| `PreviewAPIKey`  | -         | `AppSettings__PreviewAPIKey`  | API key for fetching preview/draft content         |
+| `Locales`        | `en-us`   | `AppSettings__Locales`        | Comma-separated locale codes (e.g., `en-us,fr-ca`) |
+| `ChannelName`    | `website` | `AppSettings__ChannelName`    | Agility CMS channel/sitemap name                   |
+| `CacheInMinutes` | `5`       | `AppSettings__CacheInMinutes` | In-memory cache duration for API responses         |
 
 > **Note**: `CacheInMinutes` controls server-side caching of Agility API responses. Set to `0` to disable (useful for development). In preview mode, caching is always disabled regardless of this setting.
 
 ### CacheControl (CDN Headers)
 
-| Setting | Default | Env Variable | Description |
-|---------|---------|--------------|-------------|
-| `MaxAgeSeconds` | `30` | `CacheControl__MaxAgeSeconds` | CDN serves cached content for this duration before revalidating |
+| Setting                       | Default | Env Variable                                | Description                                                         |
+| ----------------------------- | ------- | ------------------------------------------- | ------------------------------------------------------------------- |
+| `MaxAgeSeconds`               | `30`    | `CacheControl__MaxAgeSeconds`               | CDN serves cached content for this duration before revalidating     |
 | `StaleWhileRevalidateSeconds` | `86400` | `CacheControl__StaleWhileRevalidateSeconds` | CDN serves stale content while fetching fresh in background (1 day) |
-| `StaleIfErrorSeconds` | `86400` | `CacheControl__StaleIfErrorSeconds` | CDN serves stale content if origin is down (1 day) |
+| `StaleIfErrorSeconds`         | `86400` | `CacheControl__StaleIfErrorSeconds`         | CDN serves stale content if origin is down (1 day)                  |
 
 Cache headers are **disabled** for:
+
 - Preview mode requests
 - Development environment
 
@@ -315,21 +317,21 @@ Use the `AgilitySource` sub-component to define different image sizes for differ
 
 ### AgilityPic Parameters
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `Image` | `ImageAttachment?` | required | The Agility image attachment object |
-| `FallbackWidth` | `int?` | null | Width for the fallback `<img>` tag (uses original if not set) |
-| `Alt` | `string?` | `Image.Label` | Alt text override (defaults to image label from CMS) |
-| `Class` | `string?` | null | CSS classes for the `<img>` element |
-| `Priority` | `bool` | false | If true, sets `loading="eager"` instead of `loading="lazy"` |
+| Parameter       | Type               | Default       | Description                                                   |
+| --------------- | ------------------ | ------------- | ------------------------------------------------------------- |
+| `Image`         | `ImageAttachment?` | required      | The Agility image attachment object                           |
+| `FallbackWidth` | `int?`             | null          | Width for the fallback `<img>` tag (uses original if not set) |
+| `Alt`           | `string?`          | `Image.Label` | Alt text override (defaults to image label from CMS)          |
+| `Class`         | `string?`          | null          | CSS classes for the `<img>` element                           |
+| `Priority`      | `bool`             | false         | If true, sets `loading="eager"` instead of `loading="lazy"`   |
 
 ### AgilitySource Parameters
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `Media` | `string` | required | CSS media query (e.g., `"(min-width: 768px)"`) |
-| `Width` | `int` | 0 | Target width for the image |
-| `Height` | `int` | 0 | Target height for the image (optional) |
+| Parameter | Type     | Default  | Description                                    |
+| --------- | -------- | -------- | ---------------------------------------------- |
+| `Media`   | `string` | required | CSS media query (e.g., `"(min-width: 768px)"`) |
+| `Width`   | `int`    | 0        | Target width for the image                     |
+| `Height`  | `int`    | 0        | Target height for the image (optional)         |
 
 ### Generated Output
 
@@ -337,13 +339,15 @@ The component generates optimized image URLs using the Agility Image API with `?
 
 ```html
 <picture>
-    <source media="(min-width: 1280px)" srcset="https://cdn.agilitycms.com/image.jpg?format=auto&w=1200" />
-    <source media="(min-width: 640px)" srcset="https://cdn.agilitycms.com/image.jpg?format=auto&w=800" />
-    <source media="(max-width: 639px)" srcset="https://cdn.agilitycms.com/image.jpg?format=auto&w=640" />
-    <img src="https://cdn.agilitycms.com/image.jpg?format=auto&w=800"
-         alt="Image label from CMS"
-         loading="eager"
-         class="object-cover w-full h-full" />
+	<source media="(min-width: 1280px)" srcset="https://cdn.agilitycms.com/image.jpg?format=auto&w=1200" />
+	<source media="(min-width: 640px)" srcset="https://cdn.agilitycms.com/image.jpg?format=auto&w=800" />
+	<source media="(max-width: 639px)" srcset="https://cdn.agilitycms.com/image.jpg?format=auto&w=640" />
+	<img
+		src="https://cdn.agilitycms.com/image.jpg?format=auto&w=800"
+		alt="Image label from CMS"
+		loading="eager"
+		class="object-cover w-full h-full"
+	/>
 </picture>
 ```
 
@@ -362,6 +366,7 @@ The starter supports Agility CMS preview mode:
 - **Production**: Preview activated via `agilitypreviewkey` query parameter or cookie
 
 Preview mode:
+
 - Fetches draft/staging content
 - Disables caching
 - Shows preview indicator bar
@@ -375,9 +380,9 @@ This project uses Tailwind CSS v4 with the typography plugin. Configuration is i
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-primary-500: #6415FF;
-  --color-secondary-500: #243E63;
-  /* ... */
+	--color-primary-500: #6415ff;
+	--color-secondary-500: #243e63;
+	/* ... */
 }
 
 @source "../Components/**/*.razor";
@@ -391,12 +396,12 @@ npx @tailwindcss/cli -i ./Styles/tailwind.css -o ./wwwroot/css/output.css --watc
 
 ## Agility CMS Terminology
 
-| Term | Description |
-|------|-------------|
-| **Components** | Reusable content modules added to page zones |
-| **Page Models** | Templates defining page structure and zones |
-| **Content Models** | Schemas defining content item structure |
-| **Containers** | Lists or single items of content |
+| Term               | Description                                  |
+| ------------------ | -------------------------------------------- |
+| **Components**     | Reusable content modules added to page zones |
+| **Page Models**    | Templates defining page structure and zones  |
+| **Content Models** | Schemas defining content item structure      |
+| **Containers**     | Lists or single items of content             |
 
 ## Troubleshooting
 
@@ -429,16 +434,16 @@ Click the button below to deploy this starter to Azure App Service:
 
 ### Deployment Parameters
 
-| Parameter | Required | Default | Description |
-|-----------|----------|---------|-------------|
-| `webAppName` | Yes | agilitycms-blazor | Globally unique name for your app |
-| `instanceGuid` | Yes | - | From Agility CMS Settings > API Keys |
-| `securityKey` | Yes | - | From Agility CMS Settings > API Keys |
-| `fetchAPIKey` | Yes | - | From Agility CMS Settings > API Keys |
-| `previewAPIKey` | Yes | - | From Agility CMS Settings > API Keys |
-| `locales` | No | en-us | Comma-separated locale codes |
-| `channelName` | No | website | Agility CMS channel name |
-| `sku` | No | B1 | App Service Plan SKU (B1+ required for WebSockets) |
+| Parameter       | Required | Default           | Description                                        |
+| --------------- | -------- | ----------------- | -------------------------------------------------- |
+| `webAppName`    | Yes      | agilitycms-blazor | Globally unique name for your app                  |
+| `instanceGuid`  | Yes      | -                 | From Agility CMS Settings > API Keys               |
+| `securityKey`   | Yes      | -                 | From Agility CMS Settings > API Keys               |
+| `fetchAPIKey`   | Yes      | -                 | From Agility CMS Settings > API Keys               |
+| `previewAPIKey` | Yes      | -                 | From Agility CMS Settings > API Keys               |
+| `locales`       | No       | en-us             | Comma-separated locale codes                       |
+| `channelName`   | No       | website           | Agility CMS channel name                           |
+| `sku`           | No       | B1                | App Service Plan SKU (B1+ required for WebSockets) |
 
 ### What Gets Deployed
 
@@ -461,11 +466,11 @@ Click the button below to deploy this starter to Azure App Service:
 
 ### SKU Recommendations
 
-| SKU | WebSockets | AlwaysOn | Recommended For |
-|-----|------------|----------|-----------------|
-| B1 | ✅ | ✅ | Development/Testing |
-| S1+ | ✅ | ✅ | Production |
-| P1V2+ | ✅ | ✅ | High-traffic Production |
+| SKU   | WebSockets | AlwaysOn | Recommended For         |
+| ----- | ---------- | -------- | ----------------------- |
+| B1    | ✅         | ✅       | Development/Testing     |
+| S1+   | ✅         | ✅       | Production              |
+| P1V2+ | ✅         | ✅       | High-traffic Production |
 
 > **Note**: Free (F1) and Shared (D1) tiers do not support WebSockets or AlwaysOn, which are required for Blazor Interactive Server components.
 
@@ -479,11 +484,11 @@ This starter includes a webhook endpoint for cache invalidation at `/api/revalid
 
 ### Cache Management Endpoints
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/revalidate` | POST | Webhook for Agility CMS cache invalidation |
-| `/api/cache/tags` | GET | View all cached tags (debugging) |
-| `/api/cache/clear` | POST | Clear all cached data |
+| Endpoint           | Method | Description                                |
+| ------------------ | ------ | ------------------------------------------ |
+| `/api/revalidate`  | POST   | Webhook for Agility CMS cache invalidation |
+| `/api/cache/tags`  | GET    | View all cached tags (debugging)           |
+| `/api/cache/clear` | POST   | Clear all cached data                      |
 
 ## Resources
 
