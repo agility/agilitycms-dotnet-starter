@@ -2,7 +2,7 @@
 
 This is a Blazor Server-Side Rendering (SSR) starter for Agility CMS, built with .NET 10.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fagility%2Fagilitycms-dotnet-starter%2Fblazor%2FAgility.NET.Blazor.Starter%2Fazuredeploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fagility%2Fagilitycms-dotnet-starter%2Fmain%2FAgility.NET.Blazor.Starter%2Fazuredeploy.json)
 
 ## Features
 
@@ -425,7 +425,7 @@ Ensure Interactive Server mode is properly configured:
 
 Click the button below to deploy this starter to Azure App Service:
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fagility%2Fagilitycms-dotnet-starter%2Fblazor%2FAgility.NET.Blazor.Starter%2Fazuredeploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fagility%2Fagilitycms-dotnet-starter%2Fmain%2FAgility.NET.Blazor.Starter%2Fazuredeploy.json)
 
 ### Deployment Parameters
 
