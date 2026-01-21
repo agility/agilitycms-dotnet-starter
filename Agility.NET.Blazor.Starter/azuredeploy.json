@@ -20,10 +20,10 @@
     },
     "branch": {
       "type": "string",
-      "defaultValue": "blazor",
+      "defaultValue": "main",
       "minLength": 2,
       "metadata": {
-        "description": "The branch to deploy (default: blazor)."
+        "description": "The branch to deploy (default: main)."
       }
     },
     "sku": {
