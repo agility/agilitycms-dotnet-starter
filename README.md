@@ -62,7 +62,7 @@ This starter uses Agility CMS's current terminology:
 1. Create a Web App (server) to host your application by clicking the `Azure Deploy` button below: <br/>
    [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fagility%2Fagilitycms-dotnet-starter%2Fmain%2FAgility.NET.MVC.Starter%2Fazuredeploy.json)
 
-2. Deploy your source to Web App by following the steps here [How to Deploy the Dotnet Starter to Azure](https://agilitycms.com/docs/dotNet/deploy-net-site-to-azure)
+2. Deploy your source to Web App by following the steps here [How to Deploy the Dotnet Starter to Azure](https://agilitycms.com/docs/dotNet/deploy-to-azure)
 
 ## Resources
 
