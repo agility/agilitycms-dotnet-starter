@@ -15,7 +15,7 @@ To start using these starters, [sign up](https://agilitycms.com/free) for a FREE
 
 Both starters share the same features:
 
-- Uses the latest version of .NET 8, with greatly improved performance across many components
+- Uses the latest version of .NET 10, with greatly improved performance across many components
 - Supports full [Layout Management](https://agilitycms.com/docs/overview/layout-management)
 - Supports Preview Mode
 - Uses Tailwind CSS v4 for styling
@@ -31,7 +31,7 @@ Both starters share the same features:
 
 Before you dive into the code, ensure you have:
 
-- [.NET SDK](https://dotnet.microsoft.com/download) (>= v8.0)
+- [.NET SDK](https://dotnet.microsoft.com/download) (>= v10.0)
 - [Node.js](https://nodejs.org/) (for Tailwind CSS compilation)
 
 ## Getting Started
