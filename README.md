@@ -2,10 +2,10 @@
 
 This monorepo contains two .NET starter projects for Agility CMS:
 
-| Project | Description | Framework |
-|---------|-------------|-----------|
-| [Agility.NET.MVC.Starter](./Agility.NET.MVC.Starter/) | Razor Pages implementation | ASP.NET Core Razor Pages |
-| [Agility.NET.Blazor.Starter](./Agility.NET.Blazor.Starter/) | Blazor SSR implementation | Blazor Server-Side Rendering |
+| Project                                                     | Description                | Framework                    |
+| ----------------------------------------------------------- | -------------------------- | ---------------------------- |
+| [Agility.NET.MVC.Starter](./Agility.NET.MVC.Starter/)       | Razor Pages implementation | ASP.NET Core Razor Pages     |
+| [Agility.NET.Blazor.Starter](./Agility.NET.Blazor.Starter/) | Blazor SSR implementation  | Blazor Server-Side Rendering |
 
 To start using these starters, [sign up](https://agilitycms.com/free) for a FREE account and create a new Instance using the DotNet Starter.
 
@@ -45,11 +45,11 @@ See the README in each project folder for specific setup instructions:
 
 This starter uses Agility CMS's current terminology:
 
-| Term | Description |
-|------|-------------|
-| **Components** | Reusable content modules that can be added to page zones (formerly called "Page Modules") |
-| **Page Models** | Templates that define the structure and zones of a page (formerly called "Page Templates") |
-| **Content Models** | Schemas that define the structure of content items |
+| Term               | Description                                                                                |
+| ------------------ | ------------------------------------------------------------------------------------------ |
+| **Components**     | Reusable content modules that can be added to page zones (formerly called "Page Modules")  |
+| **Page Models**    | Templates that define the structure and zones of a page (formerly called "Page Templates") |
+| **Content Models** | Schemas that define the structure of content items                                         |
 
 ## How It Works
 
@@ -86,8 +86,7 @@ This starter uses Agility CMS's current terminology:
 - [Official Slack](https://agilitycms.com/join-slack)
 - [Blog](https://agilitycms.com/resources/posts)
 - [GitHub](https://github.com/agility)
-- [Facebook](https://www.facebook.com/AgilityCMS/)
-- [X](https://x.com/AgilityCMS)
+- [LinkedIn](https://www.linkedin.com/company/agilitycms)
 
 ## Feedback and Questions
 
